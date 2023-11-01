@@ -7,7 +7,10 @@ internal class DependencyImplementation : IDependency
 {
     public int Create(Dependency item)
     {
-        throw new NotImplementedException();
+        int id = DataSource.Config.NextDependencyId;
+        Dependency copy = item with { Id = id };
+        DataSource.Dependencies.Add(copy);
+        return id;
     }
 
     public void Delete(int id)
@@ -17,7 +20,7 @@ internal class DependencyImplementation : IDependency
 
     public Dependency? Read(int id)
     {
-        throw new NotImplementedException();
+      return DataSource.Dependencies.Find(id);
     }
 
     public List<Dependency> ReadAll()
@@ -27,6 +30,9 @@ internal class DependencyImplementation : IDependency
 
     public void Update(Dependency item)
     {
-        throw new NotImplementedException();
+        if (Read(item.Id) is null)
+            throw new Exception($"Dependency with ID={item.Id} doesn't exists");
+        Delete(item.Id);
+        DataSource.Dependencies.Add(item);
     }
 }

@@ -7,7 +7,11 @@ public class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
     {
-        throw new NotImplementedException();
+        if (Read(item.Id) is not null)
+            throw new Exception($"Engineer with ID={item.Id} already exists");
+        DataSource.Engineers.Add(item);
+        return item.Id;
+
     }
 
     public void Delete(int id)
@@ -27,6 +31,9 @@ public class EngineerImplementation : IEngineer
 
     public void Update(Engineer item)
     {
-        throw new NotImplementedException();
+        if (Read(item.Id) is null)
+            throw new Exception($"Engineer with ID={item.Id} doesn't exists");
+        Delete(item.Id);
+        DataSource.Engineers.Add(item);
     }
 }
