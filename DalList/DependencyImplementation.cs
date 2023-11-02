@@ -15,17 +15,21 @@ internal class DependencyImplementation : IDependency
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        if (Read(id) is not null)
+        {
+            DataSource.Dependencies.RemoveAt(id);
+        }
+        throw new Exception($"Dependency with ID={id} does Not exist");
     }
 
     public Dependency? Read(int id)
     {
-      return DataSource.Dependencies.Find(id);
+        return DataSource.Dependencies.Find(dy => dy.Id == id);
     }
 
     public List<Dependency> ReadAll()
     {
-        throw new NotImplementedException();
+        return new List<Dependency>(DataSource.Dependencies);
     }
 
     public void Update(Dependency item)
