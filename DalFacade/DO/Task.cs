@@ -14,6 +14,6 @@ public record Task
     string? ProductDescription,
     string? Remarks,
     int? EngineerId,
-    EngineerExperience? CopmlexityLevel
+    EngineerExperience CopmlexityLevel
 );
 

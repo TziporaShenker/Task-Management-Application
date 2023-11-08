@@ -4,6 +4,8 @@ using DO;
 using System.Collections.Generic;
 
 
+
+
 public class TaskImplementation : ITask
 {
     public int Create(Task item)
@@ -27,10 +29,7 @@ public class TaskImplementation : ITask
                 }
             }
             DataSource.Tasks.RemoveAt(id);
-            //נגיד והיה לי משימה מספר 7 שתלויה במשימה 4 ו 5 
-            //אז עכשיו לא רלוונטי לי במה היא תלויה אז צריך למחוק 
-            //את הרשומה  מטבלת התלותיות
-            //איך נדע את ה"איידי" כדי למחוק  
+            //איך לזמן דליט של דפנדנסי
             for (int i = 0; i < DataSource.Dependencies.Count; i++)
             {
                 if (DataSource.Dependencies[i].DependentTask == id)
