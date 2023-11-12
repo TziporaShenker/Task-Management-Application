@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class EngineerImplementation : IEngineer
 {
@@ -25,7 +26,7 @@ public class EngineerImplementation : IEngineer
                     throw new Exception($"A task is depends on engineer with ID={id}");
                 }
             }
-            DataSource.Engineers.RemoveAt(id);
+            DataSource.Engineers.RemoveAll(item => item.Id == id);
         }
         else
         {
@@ -46,7 +47,9 @@ public class EngineerImplementation : IEngineer
     {
         if (Read(item.Id) is null)
             throw new Exception($"Engineer with ID={item.Id} doesn't exists");
-        Delete(item.Id);
-        DataSource.Engineers.Add(item);
+        //Delete(item.Id);
+        int id= item.Id;
+        DataSource.Engineers.RemoveAll(item => item.Id == id);
+        Create(item);
     }
 }

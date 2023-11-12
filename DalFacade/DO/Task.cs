@@ -9,9 +9,10 @@ public record Task
     DateTime CreatedAt,
     DateTime? Start,  
     DateTime? ScheduledDate,
+    DateTime? ForecastDate,
     DateTime? DeadLine,
     DateTime? Complete,
-    string? ProductDescription,
+    string? Deriverables,
     string? Remarks,
     int? EngineerId,
     EngineerExperience CopmlexityLevel

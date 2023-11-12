@@ -59,9 +59,10 @@ public static class Initialization
             DateTime _createdAt = DateTime.Now.AddDays(-30);
             DateTime? _start = null;
             DateTime? _scheduledDate= null;
+            DateTime? _forecastDate = null;
             DateTime? _deadLine= null;
             DateTime? _complete= null;
-            string? _productDescription=null;
+            string? _deriverables = null;
             string? _remarks=null;
             int? _engineerId;
             EngineerExperience _copmlexityLevel;
@@ -74,7 +75,7 @@ public static class Initialization
             x = s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
             _copmlexityLevel = (EngineerExperience)x;
 
-            Task newTsk = new (0,_description, _alias, _milestone, _createdAt, _start, _scheduledDate, _deadLine, _complete, _productDescription, _remarks, _engineerId, _copmlexityLevel);
+            Task newTsk = new (0,_description, _alias, _milestone, _createdAt, _start, _scheduledDate, _forecastDate ,_deadLine, _complete, _deriverables, _remarks, _engineerId, _copmlexityLevel);
 
             s_dalTask.Create(newTsk);
         }

@@ -1,6 +1,7 @@
 ﻿using Dal;
 using DalApi;
 using DO;
+using System.Diagnostics;
 
 
 namespace DalTest
@@ -10,18 +11,17 @@ namespace DalTest
         private static IDependency? s_dalDependency = new DependencyImplementation();
         private static IEngineer? s_dalEngineer = new EngineerImplementation();
         private static ITask? s_dalTask = new TaskImplementation();
-
         private static void EngineerMenu()
         {
             int chooseSubMenu;
-
             do
             {
-                Console.WriteLine("for add an order press a\n" +
-                                    "for read an order press b\n" +
-                                    "for read all orders press c\n" +
-                                    "for update an order press d\n" +
-                                    "for delete an order press e\n");
+                Console.WriteLine("for exit press 0\n" +
+                          "for add an order press 1\n" +
+                          "for read an order press 2\n" +
+                          "for read all orders press 3\n" +
+                          "for update an order press 4\n" +
+                          "for delete an order press 5\n");
                 chooseSubMenu = int.Parse(Console.ReadLine());
 
                 switch (chooseSubMenu)
@@ -87,7 +87,15 @@ namespace DalTest
                         int idDelete;
                         Console.WriteLine("Enter id for deleting");
                         idDelete = int.Parse(Console.ReadLine());
-                        s_dalEngineer!.Delete(idDelete);
+                        try
+                        {
+                            s_dalEngineer!.Delete(idDelete);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(  ex.Message);
+                        }
                         break;
                     default: return;
                 }
@@ -101,11 +109,12 @@ namespace DalTest
 
             do
             {
-                Console.WriteLine("for add an order press a\n" +
-                                   "for read an order press b\n" +
-                                   "for read all orders press c\n" +
-                                   "for update an order press d\n" +
-                                   "for delete an order press e\n");
+                Console.WriteLine("for exit press 0\n" +
+                          "for add an order press 1\n" +
+                          "for read an order press 2\n" +
+                          "for read all orders press 3\n" +
+                          "for update an order press 4\n" +
+                          "for delete an order press 5\n");
                 chooseSubMenu = int.Parse(Console.ReadLine());
 
                 switch (chooseSubMenu)
@@ -140,13 +149,28 @@ namespace DalTest
                         dependentTaskUpdate = int.Parse(Console.ReadLine());
                         dependsOnTaskUpdate = int.Parse(Console.ReadLine());
                         Dependency newDependencyUpdate = new(idUpdate, dependentTaskUpdate, dependsOnTaskUpdate);
-                        s_dalDependency!.Update(newDependencyUpdate);
+                        try
+                        {
+                            s_dalDependency!.Update(newDependencyUpdate);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(  ex.Message);
+                        }
                         break;
                     case 5:
                         int idDelete;
                         Console.WriteLine("Enter id for deleting");
                         idDelete = int.Parse(Console.ReadLine());
-                        s_dalDependency!.Delete(idDelete);
+                        try
+                        {
+                            s_dalDependency!.Delete(idDelete);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(  ex.Message);
+                        }
                         break;
                     default: return;
                 }
@@ -156,35 +180,36 @@ namespace DalTest
         private static void TaskMenu()
         {
             int chooseSubMenu;
-
             do
             {
-                Console.WriteLine("for add an order press a\n" +
-                                                   "for read an order press b\n" +
-                                                   "for read all orders press c\n" +
-                                                   "for update an order press d\n" +
-                                                   "for delete an order press e\n");
+                Console.WriteLine("for exit press 0\n" +
+                          "for add an order press 1\n" +
+                          "for read an order press 2\n" +
+                          "for read all orders press 3\n" +
+                          "for update an order press 4\n" +
+                          "for delete an order press 5\n");
                 chooseSubMenu = int.Parse(Console.ReadLine());
                 switch (chooseSubMenu)
                 {
                     case 1:
-                        Console.WriteLine("Enter  description, alias,deriverables, remarks,milestone, dates and task's level");
+                        Console.WriteLine("Enter description, alias, deriverables, remarks, milestone,engineerId, dates and task's level");
                         int taskEngineerId, currentTaskNum;
                         string taskDescription, taskAlias, taskDeliverables, taskRemarks;
                         bool taskMilestone;
-                        DateTime taskCreateAt, taskStart, taskForecastDate, taskDeadline, taskComplete;
+                        DateTime taskCreateAt, taskStart, taskScheduledDate,taskForecastDate, taskDeadline, taskComplete;
                         EngineerExperience taskLevel;
                         taskDescription = Console.ReadLine();
                         taskAlias = Console.ReadLine();
-                        taskDeliverables = Console.ReadLine();
-                        taskRemarks = Console.ReadLine();
                         taskMilestone = bool.Parse(Console.ReadLine());
-                        taskEngineerId = int.Parse(Console.ReadLine());
                         taskCreateAt = DateTime.Parse(Console.ReadLine());
                         taskStart = DateTime.Parse(Console.ReadLine());
+                        taskScheduledDate = DateTime.Parse(Console.ReadLine());
                         taskForecastDate = DateTime.Parse(Console.ReadLine());
                         taskDeadline = DateTime.Parse(Console.ReadLine());
                         taskComplete = DateTime.Parse(Console.ReadLine());
+                        taskDeliverables = Console.ReadLine();
+                        taskRemarks = Console.ReadLine();
+                        taskEngineerId = int.Parse(Console.ReadLine());
                         currentTaskNum = int.Parse(Console.ReadLine());
                         switch (currentTaskNum)
                         {
@@ -194,7 +219,7 @@ namespace DalTest
                             default: taskLevel = EngineerExperience.expert; break;
                         }
                         s_dalTask = new TaskImplementation();
-                        DO.Task newTask = new(0, taskDescription, taskAlias, taskMilestone, taskCreateAt, taskStart, taskForecastDate, taskDeadline, taskComplete, taskDeliverables, taskRemarks, taskEngineerId, taskLevel);
+                        DO.Task newTask = new(0, taskDescription, taskAlias, taskMilestone, taskCreateAt, taskStart, taskScheduledDate, taskForecastDate, taskDeadline, taskComplete, taskDeliverables, taskRemarks, taskEngineerId, taskLevel);
                         s_dalTask!.Create(newTask);
                         break;
                     case 2:
@@ -213,23 +238,24 @@ namespace DalTest
                         int idTaskUpdate, currentTaskNumUpdate, taskEngineerIdUpdate;
                         string taskDescriptionUpdate, taskAliasUpdate, taskDeliverablesUpdate, taskRemarksUpdate;
                         bool taskMilestoneUpdate;
-                        DateTime taskCreateAtUpdate, taskStartUpdate, taskForecastDateUpdate, taskDeadlineUpdate, taskCompleteUpdate;
+                        DateTime taskCreateAtUpdate, taskStartUpdate, taskScheduledDateUpdate, taskForecastDateUpdate, taskDeadlineUpdate, taskCompleteUpdate;
                         EngineerExperience taskLevelUpdate;
                         Console.WriteLine("Enter id for reading");
                         idTaskUpdate = int.Parse(Console.ReadLine());
                         Console.WriteLine(s_dalTask!.Read(idTaskUpdate).ToString());
                         Console.WriteLine("Enter details to update");//if null to put the same details
-                        taskMilestoneUpdate = bool.Parse(Console.ReadLine());
-                        taskEngineerIdUpdate = int.Parse(Console.ReadLine());
                         taskDescriptionUpdate = Console.ReadLine();
                         taskAliasUpdate = Console.ReadLine();
-                        taskDeliverablesUpdate = Console.ReadLine();
-                        taskRemarksUpdate = Console.ReadLine();
+                        taskMilestoneUpdate = bool.Parse(Console.ReadLine());
                         taskCreateAtUpdate = DateTime.Parse(Console.ReadLine());
                         taskStartUpdate = DateTime.Parse(Console.ReadLine());
+                        taskScheduledDateUpdate = DateTime.Parse(Console.ReadLine());
                         taskForecastDateUpdate = DateTime.Parse(Console.ReadLine());
                         taskDeadlineUpdate = DateTime.Parse(Console.ReadLine());
                         taskCompleteUpdate = DateTime.Parse(Console.ReadLine());
+                        taskDeliverablesUpdate = Console.ReadLine();
+                        taskRemarksUpdate = Console.ReadLine();
+                        taskEngineerIdUpdate = int.Parse(Console.ReadLine());
                         currentTaskNumUpdate = int.Parse(Console.ReadLine());
                         switch (currentTaskNumUpdate)
                         {
@@ -238,14 +264,21 @@ namespace DalTest
                             case 3: taskLevelUpdate = EngineerExperience.rookie; break;
                             default: taskLevelUpdate = EngineerExperience.expert; break;
                         }
-                        DO.Task newTaskUpdate = new(idTaskUpdate, taskDescriptionUpdate, taskAliasUpdate, taskMilestoneUpdate, taskCreateAtUpdate, taskStartUpdate, taskForecastDateUpdate, taskDeadlineUpdate, taskCompleteUpdate, taskDeliverablesUpdate, taskRemarksUpdate, taskEngineerIdUpdate, taskLevelUpdate);
+                        DO.Task newTaskUpdate = new(idTaskUpdate, taskDescriptionUpdate, taskAliasUpdate, taskMilestoneUpdate, taskCreateAtUpdate, taskStartUpdate, taskScheduledDateUpdate, taskForecastDateUpdate, taskDeadlineUpdate, taskCompleteUpdate, taskDeliverablesUpdate, taskRemarksUpdate, taskEngineerIdUpdate, taskLevelUpdate);
                         s_dalTask!.Update(newTaskUpdate);
                         break;
                     case 5:
                         int idDelete;
                         Console.WriteLine("Enter id for deleting");
                         idDelete = int.Parse(Console.ReadLine());
-                        s_dalTask!.Delete(idDelete);
+                        try
+                        {
+                            s_dalTask!.Delete(idDelete);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
                         break;
                     default: return;
                 }
@@ -285,7 +318,7 @@ namespace DalTest
             }
             catch(Exception ex) 
             {
-                Console.WriteLine(ex);
+                Console.WriteLine(ex.Message);
             }
         }
     } 

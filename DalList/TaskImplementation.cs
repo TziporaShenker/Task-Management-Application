@@ -28,7 +28,7 @@ public class TaskImplementation : ITask
                     throw new Exception($"Another task depends on task with ID={id}");
                 }
             }
-            DataSource.Tasks.RemoveAt(id);
+            DataSource.Tasks.RemoveAll(item => item.Id == id);
             //איך לזמן דליט של דפנדנסי
             for (int i = 0; i < DataSource.Dependencies.Count; i++)
             {
@@ -47,7 +47,6 @@ public class TaskImplementation : ITask
     public Task? Read(int id)
     {
         return DataSource.Tasks.Find(tk => tk.Id == id);
-
     }
 
     public List<Task> ReadAll()
@@ -59,7 +58,9 @@ public class TaskImplementation : ITask
     {
         if (Read(item.Id) is null)
             throw new Exception($"Task with ID={item.Id} doesn't exists");
-        Delete(item.Id);
-        DataSource.Tasks.Add(item);
+        //Delete(item.Id);
+        int id = item.Id;
+        DataSource.Tasks.RemoveAll(item => item.Id==id);
+        Create(item);
     }
 }
