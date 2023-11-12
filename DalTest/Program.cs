@@ -39,10 +39,10 @@ namespace DalTest
                         currentNum = int.Parse(Console.ReadLine());
                         switch (currentNum)
                         {
-                            case 1: levelEngineer = EngineerExperience.expert; break;
-                            case 2: levelEngineer = EngineerExperience.junior; break;
-                            case 3: levelEngineer = EngineerExperience.rookie; break;
-                            default: levelEngineer = EngineerExperience.expert; break;
+                            case 1: levelEngineer = EngineerExperience.Expert; break;
+                            case 2: levelEngineer = EngineerExperience.Competent; break;
+                            case 3: levelEngineer = EngineerExperience.Novice; break;
+                            default: levelEngineer = EngineerExperience.Expert; break;
                         }
                         s_dalEngineer = new EngineerImplementation();
                         Engineer newEngineer = new(idEngineer, nameEngineer, emailEngineer, levelEngineer, costEngineer);
@@ -75,10 +75,10 @@ namespace DalTest
                         currentNumUpdate = int.Parse(Console.ReadLine());
                         switch (currentNumUpdate)
                         {
-                            case 1: levelEngineerUpdate = EngineerExperience.expert; break;
-                            case 2: levelEngineerUpdate = EngineerExperience.junior; break;
-                            case 3: levelEngineerUpdate = EngineerExperience.rookie; break;
-                            default: levelEngineerUpdate = EngineerExperience.expert; break;
+                            case 1: levelEngineerUpdate = EngineerExperience.Expert; break;
+                            case 2: levelEngineerUpdate = EngineerExperience.Competent; break;
+                            case 3: levelEngineerUpdate = EngineerExperience.Novice; break;
+                            default: levelEngineerUpdate = EngineerExperience.Expert; break;
                         }
                         Engineer newEngineerUpdate = new(idEngineerUpdate, nameEngineerUpdate, emailEngineerUpdate, levelEngineerUpdate, costEngineerUpdate);
                         s_dalEngineer!.Update(newEngineerUpdate);
@@ -213,10 +213,10 @@ namespace DalTest
                         currentTaskNum = int.Parse(Console.ReadLine());
                         switch (currentTaskNum)
                         {
-                            case 1: taskLevel = EngineerExperience.expert; break;
-                            case 2: taskLevel = EngineerExperience.junior; break;
-                            case 3: taskLevel = EngineerExperience.rookie; break;
-                            default: taskLevel = EngineerExperience.expert; break;
+                            case 1: taskLevel = EngineerExperience.Expert; break;
+                            case 2: taskLevel = EngineerExperience.Competent; break;
+                            case 3: taskLevel = EngineerExperience.Novice; break;
+                            default: taskLevel = EngineerExperience.Expert; break;
                         }
                         s_dalTask = new TaskImplementation();
                         DO.Task newTask = new(0, taskDescription, taskAlias, taskMilestone, taskCreateAt, taskStart, taskScheduledDate, taskForecastDate, taskDeadline, taskComplete, taskDeliverables, taskRemarks, taskEngineerId, taskLevel);
@@ -259,10 +259,12 @@ namespace DalTest
                         currentTaskNumUpdate = int.Parse(Console.ReadLine());
                         switch (currentTaskNumUpdate)
                         {
-                            case 1: taskLevelUpdate = EngineerExperience.expert; break;
-                            case 2: taskLevelUpdate = EngineerExperience.junior; break;
-                            case 3: taskLevelUpdate = EngineerExperience.rookie; break;
-                            default: taskLevelUpdate = EngineerExperience.expert; break;
+                            case 1: taskLevelUpdate = EngineerExperience.Expert; break;
+                            case 2: taskLevelUpdate = EngineerExperience.Competent; break;
+                            case 3: taskLevelUpdate = EngineerExperience.Novice; break;
+                            default: taskLevelUpdate = EngineerExperience.Expert
+
+; break;
                         }
                         DO.Task newTaskUpdate = new(idTaskUpdate, taskDescriptionUpdate, taskAliasUpdate, taskMilestoneUpdate, taskCreateAtUpdate, taskStartUpdate, taskScheduledDateUpdate, taskForecastDateUpdate, taskDeadlineUpdate, taskCompleteUpdate, taskDeliverablesUpdate, taskRemarksUpdate, taskEngineerIdUpdate, taskLevelUpdate);
                         s_dalTask!.Update(newTaskUpdate);
