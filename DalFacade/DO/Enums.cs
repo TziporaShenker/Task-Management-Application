@@ -2,10 +2,10 @@
 
 public enum EngineerExperience
 {
-    Expert,
-    Proficient,
-    Competent,
+    Novice,
     AdvancedBeginner,
-    Novice
+    Competent,
+    Proficient,
+    Expert
 }
 
