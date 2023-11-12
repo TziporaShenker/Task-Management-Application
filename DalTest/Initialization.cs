@@ -2,8 +2,12 @@
 namespace DalTest;
 using DalApi;
 using DO;
+using System.Diagnostics;
+using System.Net;
 using System.Numerics;
 using System.Security.Cryptography;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Security.Principal;
 
 public static class Initialization
 {
@@ -20,7 +24,7 @@ public static class Initialization
         string[] engineerNames =
         {
          "Dani Levi" ,"Eli Amar", "Yair Cohen",
-        "Ariela Levin", "Dina Klein", "Shira Israelof"
+        "Ariela Levin", "Dina Klein"
         };
 
         foreach (var _name in engineerNames)
@@ -48,8 +52,26 @@ public static class Initialization
         
         string[] tasksDescription =
         {
-         "Dani Levi" ,"Eli Amar", "Yair Cohen",
-        "Ariela Levin", "Dina Klein", "Shira Israelof"
+            "Designing and developing new products or systems.",
+            "Conducting research and analysis to solve engineering problems.",
+            "Creating and interpreting technical drawings and specifications.",
+            "Testing and evaluating prototypes and systems for performance and safety.",
+            "Collaborating with cross - functional teams to identify and address design issues.",
+            "Developing and implementing engineering solutions to optimize manufacturing processes.",
+            "Conducting feasibility studies to assess the viability of engineering projects.",
+            "Providing technical support and guidance to colleagues and clients.",
+            "Managing and overseeing engineering projects from start to finish.",
+            "Ensuring compliance with industry standards and regulations.",
+            "Conducting risk assessments and implementing appropriate safety measures.",
+            "Troubleshooting and resolving technical issues and malfunctions.",
+            "Conducting quality control and assurance checks on products and systems.",
+            "Developing and implementing preventive maintenance strategies.",
+            "Keeping up - to - date with industry trends and advancements in engineering technology.",
+            "Collaborating with suppliers and vendors to source and procure materials and equipment.",
+            "Training and mentoring junior engineers and technicians.",
+            "Conducting cost analysis and budgeting for engineering projects.",
+            "Participating in continuous improvement initiatives to enhance efficiency and productivity.",
+            "Documenting and communicating engineering processes and outcomes effectively."
         };
 
         foreach (var _description in tasksDescription)
@@ -82,6 +104,7 @@ public static class Initialization
     }
     private static void createDependencies()
     {
+        //לעשות 40 תלותיות
 
         int? _dependentTask;
         int? _dependsOnTask; 
