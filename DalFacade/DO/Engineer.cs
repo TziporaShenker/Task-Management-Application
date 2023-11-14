@@ -1,5 +1,15 @@
-﻿namespace DO;
+﻿using System.Reflection.Emit;
+using System.Runtime.ConstrainedExecution;
 
+namespace DO;
+/// <summary>
+/// Engineer Entity represents a engineer with all its props
+/// </summary>
+/// <param name="Id">Unique ID number</param>
+/// <param name="Name">Engineer's name (full name)</param>
+/// <param name="Email">Engineer's Email</param>
+/// <param name="Level">Engineer level</param>
+/// <param name="Cost">cost per hour</param>
 public record Engineer
 (
     int Id,
