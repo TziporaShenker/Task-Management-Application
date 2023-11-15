@@ -11,6 +11,9 @@ namespace DalTest
         private static IDependency? s_dalDependency = new DependencyImplementation();
         private static IEngineer? s_dalEngineer = new EngineerImplementation();
         private static ITask? s_dalTask = new TaskImplementation();
+        /// <summary>
+        /// A function that allows operations to be performed on the engineer entity
+        /// </summary>
         private static void EngineerMenu()
         {
             int chooseSubMenu;
@@ -106,7 +109,9 @@ namespace DalTest
             } while (chooseSubMenu > 0 && chooseSubMenu < 6);
         }
 
-
+        /// <summary>
+        /// A function that allows operations to be performed on the dependency entity
+        /// </summary>
         private static void DependencyMenu()
         {
             int chooseSubMenu;
@@ -180,7 +185,9 @@ namespace DalTest
                 }
             } while (chooseSubMenu > 0 && chooseSubMenu < 6);
         }
-
+        /// <summary>
+        /// A function that allows operations to be performed on the task entity
+        /// </summary>
         private static void TaskMenu()
         {
             int chooseSubMenu;
@@ -293,7 +300,11 @@ namespace DalTest
             } while (chooseSubMenu > 0 && chooseSubMenu < 6);
         }
 
-
+        /// <summary>
+        /// Main plan for testing a data layer
+        /// The main program calls a function depending on the selected entity
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             try
@@ -308,15 +319,15 @@ namespace DalTest
                     switch (chooseEntity)
                     {
                         case 1:
-                            TaskMenu();//doing this function 
+                            TaskMenu();
                             break;
                         case 2:
 
-                            EngineerMenu();//doing this function 
+                            EngineerMenu();
                             break;
                         case 3:
 
-                            DependencyMenu();//doing this function 
+                            DependencyMenu();
                             break;
                         default:
                             break;

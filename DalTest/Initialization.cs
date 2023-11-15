@@ -9,13 +9,18 @@ using System.Security.Cryptography;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Security.Principal;
 
+/// <summary>
+/// A class responsible for initializing the data
+/// </summary>
 public static class Initialization
 {
     private static IDependency? s_dalDependency; 
     private static IEngineer? s_dalEngineer;
     private static ITask? s_dalTask;
     private static readonly Random s_rand = new();
-
+    /// <summary>
+    /// A function that initializes the engineer entity list with data
+    /// </summary>
     private static void createEngineers()
     {
         const int MIN_ID = 200000000;
@@ -47,6 +52,9 @@ public static class Initialization
             s_dalEngineer!.Create(newEng);
         }
     }
+    /// <summary>
+    /// A function that initializes the task entity list with data
+    /// </summary>
     private static void createTasks()
     {
         
@@ -102,6 +110,9 @@ public static class Initialization
             s_dalTask.Create(newTsk);
         }
     }
+    /// <summary>
+    /// A function that initializes the dependency entity list with data
+    /// </summary>
     private static void createDependencies()
     {
         //לעשות 40 תלותיות
@@ -126,6 +137,13 @@ public static class Initialization
 
         }
     }
+    /// <summary>
+    /// A public method, which will schedule the private methods we prepared and trigger the initialization of the lists.
+    /// </summary>
+    /// <param name="dalDependency">An access variable to a list of dependencies (the interface parameter we defined), which comes already initialized from the layer above.</param>
+    /// <param name="dalEngineer">An access variable to a list of engineers (the interface parameter we defined), which comes already initialized from the layer above.</param>
+    /// <param name="dalTask">An access variable to a list of tasks (the interface parameter we defined), which comes already initialized from the layer above.</param>
+    /// <exception cref="NullReferenceException"></exception>
     public static void Do(IDependency? dalDependency, IEngineer? dalEngineer, ITask? dalTask)
     {
         s_dalDependency  = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
