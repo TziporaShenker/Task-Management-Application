@@ -122,19 +122,17 @@ public static class Initialization
         int x;
         List<Task> tasksList = s_dalTask.ReadAll(); ;
 
-        for (int i = 0; i < tasksList.Count(); i++)
+        for (int i = 0; i < 40; i++)
         {
-            _dependentTask= tasksList[i].Id;
-            
+            int a = s_rand.Next(0, tasksList.Count());
+            _dependentTask = tasksList[a].Id;
             do
                 x = s_rand.Next(0, tasksList.Count());
-            while (tasksList[i].Id == x);
+            while (tasksList[a].Id == x);
 
             _dependsOnTask = tasksList[x].Id;
-
             Dependency newDep = new(0, _dependentTask, _dependsOnTask);
             s_dalDependency!.Create(newDep);
-
         }
     }
     /// <summary>

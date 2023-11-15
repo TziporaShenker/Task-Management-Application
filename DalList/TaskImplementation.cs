@@ -71,9 +71,8 @@ public class TaskImplementation : ITask
     {
         if (Read(item.Id) is null)
             throw new Exception($"Task with ID={item.Id} doesn't exists");
-        //Delete(item.Id);
         int id = item.Id;
         DataSource.Tasks.RemoveAll(item => item.Id==id);
-        Create(item);
+        DataSource.Tasks.Add(item);
     }
 }

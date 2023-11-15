@@ -55,6 +55,6 @@ public class DependencyImplementation : IDependency
         if (Read(item.Id) is null)
             throw new Exception($"Dependency with ID={item.Id} doesn't exists");
         Delete(item.Id);
-        Create(item);
+        DataSource.Dependencies.Add(item);
     }
 }

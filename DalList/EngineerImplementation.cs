@@ -63,9 +63,8 @@ public class EngineerImplementation : IEngineer
     {
         if (Read(item.Id) is null)
             throw new Exception($"Engineer with ID={item.Id} doesn't exists");
-        //Delete(item.Id);
         int id= item.Id;
         DataSource.Engineers.RemoveAll(item => item.Id == id);
-        Create(item);
+        DataSource.Engineers.Add(item);
     }
 }
