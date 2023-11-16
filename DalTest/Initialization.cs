@@ -101,9 +101,11 @@ public static class Initialization
             EngineerExperience _copmlexityLevel;
 
 
-            List<Engineer> engineersList= s_dal.Engineer.ReadAll();
+            IEnumerable<Engineer?> engineersList= s_dal.Engineer.ReadAll();
             int x = s_rand.Next(0, engineersList.Count());
-            _engineerId= engineersList[x].Id;
+            _engineerId= engineersList.ElementAt(x).Id;
+
+            _engineerId = null;
 
             x = s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
             _copmlexityLevel = (EngineerExperience)x;
@@ -121,17 +123,17 @@ public static class Initialization
         int? _dependentTask;
         int? _dependsOnTask; 
         int x;
-        List<Task> tasksList = s_dal.Task.ReadAll(); ;
+        IEnumerable<Task?> tasksList = s_dal.Task.ReadAll(); ;
 
         for (int i = 0; i < 40; i++)
         {
             int a = s_rand.Next(0, tasksList.Count());
-            _dependentTask = tasksList[a].Id;
+            _dependentTask = tasksList.ElementAt(a).Id;
             do
                 x = s_rand.Next(0, tasksList.Count());
-            while (tasksList[a].Id == x);
+            while (tasksList.ElementAt(a).Id == x);
 
-            _dependsOnTask = tasksList[x].Id;
+            _dependsOnTask = tasksList.ElementAt(x).Id;
             Dependency newDep = new(0, _dependentTask, _dependsOnTask);
             s_dal.Dependency!.Create(newDep);
         }

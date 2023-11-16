@@ -35,7 +35,6 @@ internal class TaskImplementation : ITask
             DataSource.Tasks.RemoveAll(item => item.Id == id);
 
             DataSource.Dependencies.RemoveAll(dependency => dependency.DependentTask == id);
-
         }
         else 
         { 
@@ -49,13 +48,22 @@ internal class TaskImplementation : ITask
     {
         return DataSource.Tasks.Find(tk => tk.Id == id);
     }
-
+    /// <summary>
+    /// The method will allow you to select a boolean function, delegate the Func type, which will operate on one of the members of the list of type Task and return the first object in the list on which the function returns true.
+    /// </summary>
+    public Task Read(Func<Task, bool>? filter)
+    {
+        return DataSource.Tasks.FirstOrDefault(filter);
+    }
     /// <summary>
     /// Return a copy of the list of references to all objects of type Task
     /// </summary>
-    public List<Task> ReadAll()
+    public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null)
     {
-        return new List<Task>(DataSource.Tasks);
+        if (filter == null)
+            return DataSource.Tasks.Select(item => item);
+        else
+            return DataSource.Tasks.Where(filter);
     }
 
     /// <summary>

@@ -2,6 +2,7 @@
 using DalApi;
 using DO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 internal class EngineerImplementation : IEngineer
@@ -25,12 +26,9 @@ internal class EngineerImplementation : IEngineer
     {
         if (Read(id) is not null)
         {
-            for (int i = 0; i < DataSource.Tasks.Count; i++) 
-            { 
-                if (DataSource.Tasks[i].EngineerId == id)
-                {
-                    throw new Exception($"A task is depends on engineer with ID={id}");
-                }
+            if (DataSource.Tasks.Any(task => task.EngineerId == id))
+            {
+                throw new Exception($"A task is depends on engineer with ID={id}");
             }
             DataSource.Engineers.RemoveAll(item => item.Id == id);
         }
@@ -47,13 +45,22 @@ internal class EngineerImplementation : IEngineer
     {
         return DataSource.Engineers.Find(er => er.Id == id);
     }
-
+    /// <summary>
+    /// The method will allow you to select a boolean function, delegate the Func type, which will operate on one of the members of the list of type Engineer and return the first object in the list on which the function returns true.
+    /// </summary>
+    public Engineer Read(Func<Engineer, bool>? filter)
+    {
+        return DataSource.Engineers.FirstOrDefault(filter);
+    }
     /// <summary>
     /// Return a copy of the list of references to all objects of type Engineer
     /// </summary>
-    public List<Engineer> ReadAll()
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null)
     {
-        return new List<Engineer>(DataSource.Engineers);
+        if (filter == null)
+            return DataSource.Engineers.Select(item => item);
+        else
+            return DataSource.Engineers.Where(filter);
     }
 
     /// <summary>

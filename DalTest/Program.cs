@@ -307,7 +307,6 @@ namespace DalTest
         {
             try
             {
-                Console.WriteLine("Hello, World!");
                 //Initialization.Do(s_dalDependency, s_dalEngineer, s_dalTask); //stage 1
                 Initialization.Do(s_dal); //stage 2
                 int chooseEntity;

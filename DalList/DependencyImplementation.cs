@@ -25,8 +25,8 @@ internal class DependencyImplementation : IDependency
         {
             DataSource.Dependencies.RemoveAll(item => item.Id == id);
         }
-        else 
-        { 
+        else
+        {
             throw new Exception($"Dependency with ID={id} does Not exist");
         }
     }
@@ -34,17 +34,30 @@ internal class DependencyImplementation : IDependency
     /// <summary>
     /// Returning a reference to a single object of type Dependency with a certain ID, if it exists in a database (in a list of data of type Dependency), or null if the object does not exist.
     /// </summary>
+    
     public Dependency? Read(int id)
     {
         return DataSource.Dependencies.Find(dy => dy.Id == id);
+    }
+    /// <summary>
+    /// The method will allow you to select a boolean function, delegate the Func type, which will operate on one of the members of the list of type Dependency and return the first object in the list on which the function returns true.
+    /// </summary>
+    public Dependency Read(Func<Dependency, bool>? filter)
+    {
+        return DataSource.Dependencies.FirstOrDefault(filter);
     }
 
     /// <summary>
     /// Return a copy of the list of references to all objects of type Dependency
     /// </summary>
-    public List<Dependency> ReadAll()
+
+    public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null)
     {
-        return new List<Dependency>(DataSource.Dependencies);
+        if (filter == null)
+            return DataSource.Dependencies.Select(item => item);
+        else
+            return DataSource.Dependencies.Where(filter);
+
     }
 
     /// <summary>
