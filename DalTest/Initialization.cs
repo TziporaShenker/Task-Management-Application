@@ -14,9 +14,12 @@ using System.Security.Principal;
 /// </summary>
 public static class Initialization
 {
-    private static IDependency? s_dalDependency; 
-    private static IEngineer? s_dalEngineer;
-    private static ITask? s_dalTask;
+    //private static IDependency? s_dalDependency; //stage 1 
+    //private static IEngineer? s_dalEngineer; //stage 1
+    //private static ITask? s_dalTask; //stage 1
+
+    private static IDal? s_dal; //stage 2
+
     private static readonly Random s_rand = new();
     /// <summary>
     /// A function that initializes the engineer entity list with data
@@ -40,7 +43,7 @@ public static class Initialization
             double _cost;
             do
                 _id = s_rand.Next(MIN_ID, MAX_ID);
-            while (s_dalEngineer!.Read(_id) != null);
+            while (s_dal.Engineer!.Read(_id) != null);
 
             int x = s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
             _level  = (EngineerExperience)x;
@@ -49,7 +52,7 @@ public static class Initialization
 
             Engineer newEng = new(_id, _name, _email, _level, _cost);
 
-            s_dalEngineer!.Create(newEng);
+            s_dal.Engineer!.Create(newEng);
         }
     }
     /// <summary>
@@ -98,7 +101,7 @@ public static class Initialization
             EngineerExperience _copmlexityLevel;
 
 
-            List<Engineer> engineersList= s_dalEngineer.ReadAll();
+            List<Engineer> engineersList= s_dal.Engineer.ReadAll();
             int x = s_rand.Next(0, engineersList.Count());
             _engineerId= engineersList[x].Id;
 
@@ -107,7 +110,7 @@ public static class Initialization
 
             Task newTsk = new (0,_description, _alias, _milestone, _createdAt, _start, _scheduledDate, _forecastDate ,_deadLine, _complete, _deriverables, _remarks, _engineerId, _copmlexityLevel);
 
-            s_dalTask.Create(newTsk);
+            s_dal.Task.Create(newTsk);
         }
     }
     /// <summary>
@@ -115,12 +118,10 @@ public static class Initialization
     /// </summary>
     private static void createDependencies()
     {
-        //לעשות 40 תלותיות
-
         int? _dependentTask;
         int? _dependsOnTask; 
         int x;
-        List<Task> tasksList = s_dalTask.ReadAll(); ;
+        List<Task> tasksList = s_dal.Task.ReadAll(); ;
 
         for (int i = 0; i < 40; i++)
         {
@@ -132,9 +133,10 @@ public static class Initialization
 
             _dependsOnTask = tasksList[x].Id;
             Dependency newDep = new(0, _dependentTask, _dependsOnTask);
-            s_dalDependency!.Create(newDep);
+            s_dal.Dependency!.Create(newDep);
         }
     }
+
     /// <summary>
     /// A public method, which will schedule the private methods we prepared and trigger the initialization of the lists.
     /// </summary>
@@ -142,11 +144,17 @@ public static class Initialization
     /// <param name="dalEngineer">An access variable to a list of engineers (the interface parameter we defined), which comes already initialized from the layer above.</param>
     /// <param name="dalTask">An access variable to a list of tasks (the interface parameter we defined), which comes already initialized from the layer above.</param>
     /// <exception cref="NullReferenceException"></exception>
-    public static void Do(IDependency? dalDependency, IEngineer? dalEngineer, ITask? dalTask)
+
+    //public static void Do(IDependency? dalDependency, IEngineer? dalEngineer, ITask? dalTask) //stage 1
+    public static void Do(IDal dal) //stage 2
     {
-        s_dalDependency  = dalDependency ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!");
-        s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!");
+
+        //s_dalDependency  = dalDependency ?? throw new NullReferenceException("DAL can not be null!"); //stage 1
+        //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!"); //stage 1
+        //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!"); //stage 1
+
+        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+
         createEngineers();
         createTasks();
         createDependencies();

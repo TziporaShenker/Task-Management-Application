@@ -4,7 +4,7 @@ using DO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public class EngineerImplementation : IEngineer
+internal class EngineerImplementation : IEngineer
 {
     /// <summary>
     /// Adding a new object of type Engineer to a database, (to the list of objects of type Engineer).

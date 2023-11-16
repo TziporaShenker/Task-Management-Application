@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 
 
-public class TaskImplementation : ITask
+internal class TaskImplementation : ITask
 {
     /// <summary>
     /// Adding a new object of type Task to a database, (to the list of objects of type Task).
@@ -27,21 +27,15 @@ public class TaskImplementation : ITask
     {
         if (Read(id) is not null)
         {
-            for (int i = 0; i < DataSource.Dependencies.Count; i++) 
-            { 
-                if (DataSource.Dependencies[i].DependsOnTask == id)
-                {
-                    throw new Exception($"Another task depends on task with ID={id}");
-                }
-            }
-            DataSource.Tasks.RemoveAll(item => item.Id == id);
-            for (int i = 0; i < DataSource.Dependencies.Count; i++)
+            if (DataSource.Dependencies.Any(dependency => dependency.DependsOnTask == id))
             {
-                if (DataSource.Dependencies[i].DependentTask == id)
-                {
-                    DataSource.Dependencies.RemoveAt(i);
-                }
+                throw new Exception($"Another task depends on task with ID={id}");
             }
+
+            DataSource.Tasks.RemoveAll(item => item.Id == id);
+
+            DataSource.Dependencies.RemoveAll(dependency => dependency.DependentTask == id);
+
         }
         else 
         { 
