@@ -29,7 +29,7 @@ internal class TaskImplementation : ITask
         {
             if (DataSource.Dependencies.Any(dependency => dependency.DependsOnTask == id))
             {
-                throw new Exception($"Another task depends on task with ID={id}");
+                throw new DalDeletionImpossible($"Another task depends on task with ID={id}");
             }
 
             DataSource.Tasks.RemoveAll(item => item.Id == id);
@@ -38,7 +38,7 @@ internal class TaskImplementation : ITask
         }
         else 
         { 
-           throw new Exception($"Task with ID={id} doesn't exists");
+           throw new DalDoesNotExistException($"Task with ID={id} doesn't exists");
         }
     }
     /// <summary>
@@ -72,7 +72,7 @@ internal class TaskImplementation : ITask
     public void Update(Task item)
     {
         if (Read(item.Id) is null)
-            throw new Exception($"Task with ID={item.Id} doesn't exists");
+            throw new DalDoesNotExistException($"Task with ID={item.Id} doesn't exists");
         int id = item.Id;
         DataSource.Tasks.RemoveAll(item => item.Id==id);
         DataSource.Tasks.Add(item);

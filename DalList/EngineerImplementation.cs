@@ -13,7 +13,7 @@ internal class EngineerImplementation : IEngineer
     public int Create(Engineer item)
     {
         if (Read(item.Id) is not null)
-            throw new Exception($"Engineer with ID={item.Id} already exists");
+             throw new DalAlreadyExistsException($"Engineer with ID={item.Id} already exists");
         DataSource.Engineers.Add(item);
         return item.Id;
 
@@ -28,13 +28,13 @@ internal class EngineerImplementation : IEngineer
         {
             if (DataSource.Tasks.Any(task => task.EngineerId == id))
             {
-                throw new Exception($"A task is depends on engineer with ID={id}");
+                throw new DalDeletionImpossible($"A task is depends on engineer with ID={id}");
             }
             DataSource.Engineers.RemoveAll(item => item.Id == id);
         }
         else
         {
-            throw new Exception($"Engineer with ID={id} does Not exist");
+            throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
         }
     }
 
@@ -69,7 +69,7 @@ internal class EngineerImplementation : IEngineer
     public void Update(Engineer item)
     {
         if (Read(item.Id) is null)
-            throw new Exception($"Engineer with ID={item.Id} doesn't exists");
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} doesn't exists");
         int id= item.Id;
         DataSource.Engineers.RemoveAll(item => item.Id == id);
         DataSource.Engineers.Add(item);
