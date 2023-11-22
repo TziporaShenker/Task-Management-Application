@@ -49,8 +49,8 @@ namespace DalTest
                             case 1: levelEngineer = EngineerExperience.Novice; break;
                             case 2: levelEngineer = EngineerExperience.AdvancedBeginner; break;
                             case 3: levelEngineer = EngineerExperience.Competent; break;
-                            case 4:levelEngineer = EngineerExperience.Proficient; break;
-                            case 5:levelEngineer = EngineerExperience.Expert; break;
+                            case 4: levelEngineer = EngineerExperience.Proficient; break;
+                            case 5: levelEngineer = EngineerExperience.Expert; break;
                             default: levelEngineer = EngineerExperience.Expert; break;
                         }
                         s_dal.Engineer.Create(new Engineer(idEngineer, nameEngineer, emailEngineer, levelEngineer, costEngineer));
@@ -103,7 +103,7 @@ namespace DalTest
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(  ex.Message);
+                            Console.WriteLine(ex.Message);
                         }
                         break;
                     default: return;
@@ -165,7 +165,7 @@ namespace DalTest
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(  ex.Message);
+                            Console.WriteLine(ex.Message);
                         }
                         break;
                     case 5:
@@ -178,7 +178,7 @@ namespace DalTest
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(  ex.Message);
+                            Console.WriteLine(ex.Message);
                         }
                         break;
                     default: return;
@@ -207,7 +207,7 @@ namespace DalTest
                         int taskEngineerId, currentTaskNum;
                         string taskDescription, taskAlias, taskDeliverables, taskRemarks;
                         bool taskMilestone;
-                        DateTime taskCreateAt, taskStart, taskScheduledDate,taskForecastDate, taskDeadline, taskComplete;
+                        DateTime taskCreateAt, taskStart, taskScheduledDate, taskForecastDate, taskDeadline, taskComplete;
                         EngineerExperience taskLevel;
                         taskDescription = Console.ReadLine();
                         taskAlias = Console.ReadLine();
@@ -333,10 +333,10 @@ namespace DalTest
                 }
                 while (chooseEntity != 0);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
-    } 
+    }
 }

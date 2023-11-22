@@ -54,7 +54,7 @@ public static class Initialization
 
         //    s_dal.Engineer!.Create(newEng);
         //}
-        var engineers = 
+        var engineers =
             engineerNames.Select(_name =>
         {
             int _id;
@@ -81,7 +81,7 @@ public static class Initialization
     /// </summary>
     private static void createTasks()
     {
-        
+
         string[] tasksDescription =
         {
             "Designing and developing new products or systems.",
@@ -183,11 +183,11 @@ public static class Initialization
             randomOrderedTasks
             .Select(_dependentTask =>
             {
-            do
-                x = s_rand.Next(0, tasksList.Count());
-            while (tasksList.ElementAt(_dependentTask).Id == x);
-            _dependsOnTask = tasksList.ElementAt(x).Id;
-            return new Dependency(0, _dependentTask, _dependsOnTask);
+                do
+                    x = s_rand.Next(0, tasksList.Count());
+                while (tasksList.ElementAt(_dependentTask).Id == x);
+                _dependsOnTask = tasksList.ElementAt(x).Id;
+                return new Dependency(0, _dependentTask, _dependsOnTask);
 
             });
         dependecies.ToList().ForEach(dependency => s_dal.Dependency!.Create(dependency));
@@ -229,6 +229,6 @@ public static class Initialization
         createTasks();
         createDependencies();
     }
-}  
+}
 
 
