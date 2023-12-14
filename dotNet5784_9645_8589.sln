@@ -14,7 +14,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalFacade\DalF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.csproj", "{70CDBB69-4D5D-4352-BD62-44995CDACB31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalTest", "DalTest\DalTest.csproj", "{24FCA902-FC82-4462-A559-CDD23BFD4AE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{24FCA902-FC82-4462-A559-CDD23BFD4AE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{C583E0C8-A488-43CE-AE16-E49E27B1BFAD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{F1C34E09-8191-4135-BBC4-CC4C81CB87BE}"
+	ProjectSection(SolutionItems) = preProject
+		xml\data-config.xml = xml\data-config.xml
+		xml\dependencies.xml = xml\dependencies.xml
+		xml\engineers.xml = xml\engineers.xml
+		xml\tasks.xml = xml\tasks.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +48,16 @@ Global
 		{24FCA902-FC82-4462-A559-CDD23BFD4AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24FCA902-FC82-4462-A559-CDD23BFD4AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24FCA902-FC82-4462-A559-CDD23BFD4AE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C583E0C8-A488-43CE-AE16-E49E27B1BFAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C583E0C8-A488-43CE-AE16-E49E27B1BFAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C583E0C8-A488-43CE-AE16-E49E27B1BFAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C583E0C8-A488-43CE-AE16-E49E27B1BFAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C583E0C8-A488-43CE-AE16-E49E27B1BFAD} = {2E496C14-6D8C-4800-85EC-2AD629B191AD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BC0B3D4E-8563-468A-AC8F-477B9A932F74}
