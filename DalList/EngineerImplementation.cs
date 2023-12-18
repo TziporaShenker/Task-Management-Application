@@ -74,4 +74,8 @@ internal class EngineerImplementation : IEngineer
         DataSource.Engineers.RemoveAll(item => item.Id == id);
         DataSource.Engineers.Add(item);
     }
+    public void Reset()
+    {
+        DataSource.Engineers.Clear();
+    }
 }

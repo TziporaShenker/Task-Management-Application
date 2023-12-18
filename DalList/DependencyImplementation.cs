@@ -70,4 +70,8 @@ internal class DependencyImplementation : IDependency
         Delete(item.Id);
         DataSource.Dependencies.Add(item);
     }
+    public void Reset()
+    {
+        DataSource.Dependencies.Clear();
+    }
 }

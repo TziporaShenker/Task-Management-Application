@@ -43,6 +43,7 @@ internal class DependencyImplementation : IDependency
             }
         }
     }
+
     public Dependency? Read(int id)
     {
         XElement dependenciesElement = XMLTools.LoadListFromXMLElement(filePath);
@@ -57,6 +58,11 @@ internal class DependencyImplementation : IDependency
     }
 
     public IEnumerable<Dependency?> ReadAll(Func<Dependency, bool>? filter = null)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Reset()
     {
         throw new NotImplementedException();
     }

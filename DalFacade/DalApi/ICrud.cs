@@ -11,5 +11,7 @@ public interface ICrud<T> where T : class
     //List<T> ReadAll(); //stage 1 only, Reads all entity objects
     IEnumerable<T?> ReadAll(Func<T, bool>? filter = null); // stage 2
     void Update(T item); //Updates entity object
-    void Delete(int id); //Deletes an object by its Id
+    void Delete(int id);//Deletes an object by its Id
+    void Reset(); 
+
 }

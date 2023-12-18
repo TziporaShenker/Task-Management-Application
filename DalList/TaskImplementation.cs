@@ -23,6 +23,7 @@ internal class TaskImplementation : ITask
     /// <summary>
     /// Deletion of an existing object with a certain ID, from the list of objects of type Task.
     /// </summary>
+
     public void Delete(int id)
     {
         if (Read(id) is not null)
@@ -76,5 +77,10 @@ internal class TaskImplementation : ITask
         int id = item.Id;
         DataSource.Tasks.RemoveAll(item => item.Id==id);
         DataSource.Tasks.Add(item);
+    }
+
+    public void Reset()
+    {
+        DataSource.Tasks.Clear();
     }
 }
