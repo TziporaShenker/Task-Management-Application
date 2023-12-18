@@ -48,8 +48,7 @@ internal class DependencyImplementation : IDependency
     {
         XElement dependenciesElement = XMLTools.LoadListFromXMLElement(filePath);
         var readDependencyElement = dependenciesElement.Elements("Dependency").FirstOrDefault(d => (int)d.Element("Id") == id);
-        
-        return readDependencyElement;
+ 
     }
 
     public Dependency? Read(Func<Dependency, bool> filter)

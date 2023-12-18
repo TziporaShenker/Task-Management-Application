@@ -3,6 +3,7 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 internal class EngineerImplementation : IEngineer
@@ -12,90 +13,74 @@ internal class EngineerImplementation : IEngineer
 
     public int Create(Engineer item)
     {
-        // הגדרת אוביקט= מכונה שיודעת להמיר אוביקטים מ ואל מחרוזת
-        XmlSerializer serializer = new XmlSerializer(typeof(List<DO.Engineer>));
-        // מצביע לקובץ שיודע לקרוא
-        TextReader textReader = new StringReader(engineersFile);
-        // 
-        List<DO.Engineer> lst = (List<Engineer>?)serializer.Deserialize(textReader) ?? throw new Exception();
-        // הוספת הפריט החדש
-        lst.Add(item);
-
-        using (TextWriter writer = new StreamWriter(engineersFile))
-        {
-            serializer.Serialize(writer, lst);
-        }
-
+        List<Engineer> engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(engineersFile);
+        if (Read(item.Id) is not null)
+            throw new DalAlreadyExistsException($"Engineer with ID={item.Id} already exists");
+        engineers.Add(item);
+        XMLTools.SaveListToXMLSerializer<Engineer>(engineers, engineersFile);
         return item.Id;
     }
 
     public void Delete(int id)
-    { 
-        XmlSerializer serializerEngineers = new XmlSerializer(typeof(List<DO.Engineer>));
-        TextReader textReaderEngineers = new StringReader(engineersFile);
-        List<DO.Engineer> lstEngineers = (List<Engineer>?)serializerEngineers.Deserialize(textReaderEngineers) ?? throw new Exception();
+    {
+        List<Engineer> engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(engineersFile);
 
-        XmlSerializer serializerTasks = new XmlSerializer(typeof(List<DO.Task>));
-        TextReader textReaderTasks = new StringReader(tasksFile);
-        List<DO.Task> lstTasks = (List<Task>?)serializerTasks.Deserialize(textReaderTasks) ?? throw new Exception();
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(tasksFile);
+
 
         if (Read(id) is not null)
         {
-            if (lstTasks.Any(task => task.EngineerId == id))
+            if (tasks.Any(task => task.EngineerId == id))
             {
                 throw new DalDeletionImpossible($"A task is depends on engineer with ID={id}");
             }
-            lstEngineers.RemoveAll(item => item.Id == id);
+            engineers.RemoveAll(item => item.Id == id);
         }
         else
         {
             throw new DalDoesNotExistException($"Engineer with ID={id} does Not exist");
         }
+        XMLTools.SaveListToXMLSerializer<Engineer>(engineers, engineersFile);
+        XMLTools.SaveListToXMLSerializer<DO.Task>(tasks,tasksFile );
 
-        using (TextWriter writer = new StreamWriter(engineersFile))
-        {
-            serializerEngineers.Serialize(writer, lstEngineers);
-        }
+
     }
 
     public Engineer? Read(int id)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<DO.Engineer>));
-        TextReader textReader = new StringReader(engineersFile);
-        List<DO.Engineer> lst = (List<Engineer>?)serializer.Deserialize(textReader) ?? throw new Exception();
-        return lst.Find(er => er.Id == id);
+       
+        return XMLTools.LoadListFromXMLSerializer<Engineer>(engineersFile).Find(er => er.Id == id);
     }
 
     public Engineer? Read(Func<Engineer, bool> filter)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<DO.Engineer>));
-        TextReader textReader = new StringReader(engineersFile);
-        List<DO.Engineer> lst = (List<Engineer>?)serializer.Deserialize(textReader) ?? throw new Exception();
-        if (filter == null)
-            return (Engineer?)lst.Select(item => item);
-        else
-        {
 
             if (filter == null)
-                return (Engineer?)lst.Select(item => item);
+                return (Engineer?)XMLTools.LoadListFromXMLSerializer<Engineer>(engineersFile).Select(item => item);
             else
-                return (Engineer?)lst.Where(filter);
-        }
-
+                return (Engineer?)XMLTools.LoadListFromXMLSerializer<Engineer>(engineersFile).Where(filter);
     }
 
     public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        return XMLTools.LoadListFromXMLSerializer<Engineer>(engineersFile);
     }
 
     public void Reset()
     {
-        throw new NotImplementedException();
+        List<Engineer> engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(engineersFile);
+        engineers.Clear();
+        XMLTools.SaveListToXMLSerializer<Engineer>(engineers, engineersFile);
     }
 
     public void Update(Engineer item)
     {
-        throw new NotImplementedException();
+        List<Engineer> engineers = XMLTools.LoadListFromXMLSerializer<Engineer>(engineersFile);
+        if (Read(item.Id) is null)
+            throw new DalDoesNotExistException($"Engineer with ID={item.Id} doesn't exists");
+        int id = item.Id;
+        engineers.RemoveAll(item => item.Id == id);
+        engineers.Add(item);
+        XMLTools.SaveListToXMLSerializer<Engineer>(engineers, engineersFile);
     }
 }

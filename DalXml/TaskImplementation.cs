@@ -15,89 +15,73 @@ internal class TaskImplementation : ITask
 
     public int Create(Task item)
     {
-        // הגדרת אוביקט= מכונה שיודעת להמיר אוביקטים מ ואל מחרוזת
-        XmlSerializer serializer = new XmlSerializer(typeof(List<DO.Task>));
-        // מצביע לקובץ שיודע לקרוא
-        TextReader textReader = new StringReader(tasksFile);
-        List<DO.Task> lst = (List<Task>?)serializer.Deserialize(textReader) ?? throw new Exception();
-        lst.Add(item);
-
-        using (TextWriter writer = new StreamWriter(tasksFile))
-        {
-            serializer.Serialize(writer, lst);
-        }
-
+        List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(tasksFile);
+        tasks.Add(item);
+        XMLTools.SaveListToXMLSerializer<Task>(tasks, tasksFile);
         return item.Id;
     }
 
     public void Delete(int id)
     {
-        XmlSerializer serializerTasks = new XmlSerializer(typeof(List<DO.Task>));
-        TextReader textReaderTasks = new StringReader(tasksFile); 
-        List<DO.Task> lstTasks = (List<Task>?)serializerTasks.Deserialize(textReaderTasks) ?? throw new Exception(); 
-        XmlSerializer serializerDependencies = new XmlSerializer(typeof(List<DO.Dependency>));
-        TextReader textReaderDependencies = new StringReader(dependenciesFile);
-        List<DO.Dependency> lstDependencies = (List<Dependency>?)serializerDependencies.Deserialize(textReaderDependencies) ?? throw new Exception();
+        List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(tasksFile);
+        List<Dependency> dependencies = XMLTools.LoadListFromXMLSerializer<Dependency>(dependenciesFile);
 
         if (Read(id) is not null)
         {
-            if (lstDependencies.Any(dependency => dependency.DependsOnTask == id))
+            if (dependencies.Any(dependency => dependency.DependsOnTask == id))
             {
                 throw new DalDeletionImpossible($"Another task depends on task with ID={id}");
             }
 
-            lstTasks.RemoveAll(item => item.Id == id);
+            tasks.RemoveAll(item => item.Id == id);
 
-            lstDependencies.RemoveAll(dependency => dependency.DependentTask == id);
+            dependencies.RemoveAll(dependency => dependency.DependentTask == id);
         }
         else
         {
             throw new DalDoesNotExistException($"Task with ID={id} doesn't exists");
         }
+        XMLTools.SaveListToXMLSerializer<Task>(tasks, tasksFile);
+        XMLTools.SaveListToXMLSerializer<Dependency>(dependencies, dependenciesFile);
 
-        using (TextWriter writer = new StreamWriter(tasksFile))
-        {
-            serializerTasks.Serialize(writer, lstTasks);
-        } 
 
-        using (TextWriter writer = new StreamWriter(dependenciesFile))
-        {
-            serializerDependencies.Serialize(writer, lstDependencies);
-        }
     }
 
     public Task? Read(int id)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<DO.Task>));
-        TextReader textReader = new StringReader(tasksFile);
-        List<DO.Task> lst = (List<Task>?)serializer.Deserialize(textReader) ?? throw new Exception();
-        return lst.Find(tk => tk.Id == id);
+       
+        return XMLTools.LoadListFromXMLSerializer<Task>(tasksFile).Find(tk => tk.Id == id);
 
     }
 
     public Task? Read(Func<Task, bool> filter)
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<DO.Task>));
-        TextReader textReader = new StringReader(tasksFile);
-        List<DO.Task> lst = (List<Task>?)serializer.Deserialize(textReader) ?? throw new Exception();
         if (filter == null)
-            return (Task?)lst.Select(item => item);
+            return (Task?)XMLTools.LoadListFromXMLSerializer<Task>(tasksFile).Select(item => item);
         else
-            return (Task?)lst.Where(filter);
+            return (Task?)XMLTools.LoadListFromXMLSerializer<Task>(tasksFile).Where(filter);
     }
 
     public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        return XMLTools.LoadListFromXMLSerializer<Task>(tasksFile);
     }
 
     public void Reset()
     {
-        throw new NotImplementedException();
+        List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(tasksFile);
+        tasks.Clear();
+        XMLTools.SaveListToXMLSerializer<Task>(tasks, tasksFile);
     }
 
     public void Update(Task item)
     {
-        throw new NotImplementedException();
+        List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(tasksFile);
+        if (Read(item.Id) is null)
+            throw new DalDoesNotExistException($"Task with ID={item.Id} doesn't exists");
+        int id = item.Id;
+        tasks.RemoveAll(item => item.Id == id);
+        tasks.Add(item);
+        XMLTools.SaveListToXMLSerializer<Task>(tasks, tasksFile);
     }
 }
