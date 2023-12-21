@@ -8,8 +8,8 @@ using System.Xml.Serialization;
 
 internal class EngineerImplementation : IEngineer
 {
-    const string engineersFile = @"..\xml\engineers.xml";
-    const string tasksFile = @"..\xml\tasks.xml";
+    const string engineersFile = @"engineers";
+    const string tasksFile = @"tasks";
 
     public int Create(Engineer item)
     {

@@ -1,4 +1,6 @@
-﻿namespace DO;
+﻿using System.ComponentModel;
+
+namespace DO;
 
 /// <summary>
 /// Task Entity represents a task with all its props
@@ -33,5 +35,8 @@ public record Task
     string? Remarks,
     int? EngineerId,
     EngineerExperience CopmlexityLevel
-);
+)
+{
+    public Task() : this(0, "", "", false, DateTime.MinValue, null,null,null,null,null,"","",0, EngineerExperience.Competent) { }
+}
 

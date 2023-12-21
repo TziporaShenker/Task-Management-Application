@@ -10,13 +10,15 @@ using System.Xml.Linq;
 
 internal class TaskImplementation : ITask
 {
-    const string tasksFile = @"..\xml\tasks.xml";
-    const string dependenciesFile = @"..\xml\dependencies.xml";
+    const string tasksFile = @"tasks";
+    const string dependenciesFile = @"dependencies";
 
     public int Create(Task item)
     {
         List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(tasksFile);
-        tasks.Add(item);
+        int id = Config.NextTaskId;
+        Task copy = item with { Id = id };
+        tasks.Add(copy);
         XMLTools.SaveListToXMLSerializer<Task>(tasks, tasksFile);
         return item.Id;
     }

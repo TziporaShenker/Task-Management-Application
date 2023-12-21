@@ -17,5 +17,8 @@ public record Engineer
     string Email,
     EngineerExperience Level,
     double Cost
-);
+)
+{
+    public Engineer() : this(0, "", "", 0, 0) { }
+}
 
