@@ -205,36 +205,38 @@ namespace DalTest
                 chooseSubMenu = int.Parse(Console.ReadLine());
                 switch (chooseSubMenu)
                 {
+  
                     case 1:
                         Console.WriteLine("Enter description, alias, deriverables, remarks, milestone,engineerId, dates and task's level");
                         int taskEngineerId, currentTaskNum;
-                        string taskDescription, taskAlias, taskDeliverables, taskRemarks;
-                        bool taskMilestone;
-                        DateTime taskCreateAt, taskStart, taskScheduledDate, taskForecastDate, taskDeadline, taskComplete;
-                        EngineerExperience taskLevel;
-                        taskDescription = Console.ReadLine();
+                        string  taskAlias,taskDescription, taskDeliverables, taskRemarks;
+                        bool taskIsMilestone;
+                        DateTime taskCreateAtDate, taskStartDate, taskScheduledDate, taskDeadlineDate, taskCompleteDate;
+                        TimeSpan taskRequiredEffortTime;
+                        EngineerExperience taskCopmlexity;
                         taskAlias = Console.ReadLine();
-                        taskMilestone = bool.Parse(Console.ReadLine());
-                        taskCreateAt = DateTime.Parse(Console.ReadLine());
-                        taskStart = DateTime.Parse(Console.ReadLine());
+                        taskDescription = Console.ReadLine();
+                        taskCreateAtDate = DateTime.Parse(Console.ReadLine());
+                        taskRequiredEffortTime=TimeSpan.Parse(Console.ReadLine());                                              
+                        taskIsMilestone = bool.Parse(Console.ReadLine());
+                        taskStartDate = DateTime.Parse(Console.ReadLine());
                         taskScheduledDate = DateTime.Parse(Console.ReadLine());
-                        taskForecastDate = DateTime.Parse(Console.ReadLine());
-                        taskDeadline = DateTime.Parse(Console.ReadLine());
-                        taskComplete = DateTime.Parse(Console.ReadLine());
+                        taskDeadlineDate = DateTime.Parse(Console.ReadLine());
+                        taskCompleteDate = DateTime.Parse(Console.ReadLine());
                         taskDeliverables = Console.ReadLine();
                         taskRemarks = Console.ReadLine();
                         taskEngineerId = int.Parse(Console.ReadLine());
                         currentTaskNum = int.Parse(Console.ReadLine());
                         switch (currentTaskNum)
                         {
-                            case 1: taskLevel = EngineerExperience.Expert; break;
-                            case 2: taskLevel = EngineerExperience.Proficient; break;
-                            case 3: taskLevel = EngineerExperience.Competent; break;
-                            case 4: taskLevel = EngineerExperience.AdvancedBeginner; break;
-                            case 5: taskLevel = EngineerExperience.Novice; break;
-                            default: taskLevel = EngineerExperience.Expert; break;
+                            case 1: taskCopmlexity = EngineerExperience.Expert; break;
+                            case 2: taskCopmlexity = EngineerExperience.Proficient; break;
+                            case 3: taskCopmlexity = EngineerExperience.Competent; break;
+                            case 4: taskCopmlexity = EngineerExperience.AdvancedBeginner; break;
+                            case 5: taskCopmlexity = EngineerExperience.Novice; break;
+                            default: taskCopmlexity = EngineerExperience.Expert; break;
                         }
-                        s_dal.Task.Create(new DO.Task(0, taskDescription, taskAlias, taskMilestone, taskCreateAt, taskStart, taskScheduledDate, taskForecastDate, taskDeadline, taskComplete, taskDeliverables, taskRemarks, taskEngineerId, taskLevel));
+                        s_dal.Task.Create(new DO.Task(0, taskAlias,taskDescription, taskCreateAtDate, taskRequiredEffortTime,taskIsMilestone,  taskStartDate, taskScheduledDate, taskDeadlineDate, taskCompleteDate, taskDeliverables, taskRemarks, taskEngineerId, taskCopmlexity));
                         break;
                     case 2:
                         int id;
@@ -249,38 +251,63 @@ namespace DalTest
                             Console.WriteLine(task.ToString());
                         break;
                     case 4:
-                        int idTaskUpdate, currentTaskNumUpdate, taskEngineerIdUpdate;
-                        string taskDescriptionUpdate, taskAliasUpdate, taskDeliverablesUpdate, taskRemarksUpdate;
-                        bool taskMilestoneUpdate;
-                        DateTime taskCreateAtUpdate, taskStartUpdate, taskScheduledDateUpdate, taskForecastDateUpdate, taskDeadlineUpdate, taskCompleteUpdate;
-                        EngineerExperience taskLevelUpdate;
+                        //                 int Id,
+                        //string Alias,
+                        //string Description,
+                        //DateTime CreatedAtDate,
+                        //TimeSpan? RequiredEffortTime,
+                        //bool IsMilestone,
+                        //DateTime? StartDate,  
+                        //DateTime? ScheduledDate,
+                        //DateTime? DeadLineDate,
+                        //DateTime? CompleteDate,
+                        //string? Deriverables,
+                        //string? Remarks,
+                        //int? EngineerId,
+                        //EngineerExperience Copmlexity
+
+                        //int taskEngineerId, currentTaskNum;
+                        //string taskAlias, taskDescription, taskDeliverables, taskRemarks;
+                        //bool taskIsMilestone;
+                        //DateTime taskCreateAtDate, taskStartDate, taskScheduledDate, taskDeadlineDate, taskCompleteDate;
+                        //TimeSpan taskRequiredEffortTime;
+                        //EngineerExperience taskCopmlexity;
+                        int taskEngineerIdUpdate, currentTaskNumUpdate,idTaskUpdate ;
+                        string taskAliasUpdate,taskDescriptionUpdate,  taskDeliverablesUpdate, taskRemarksUpdate;
+                        bool taskIsMilestoneUpdate;
+                        DateTime taskCreateAtDateUpdate, taskStartDateUpdate, taskScheduledDateUpdate, taskDeadlineDateUpdate, taskCompleteDateUpdate;
+                        TimeSpan taskRequiredEffortTimeUpdate;
+                        EngineerExperience taskCopmlexityUpdate;
+
+
+
                         Console.WriteLine("Enter id for reading");
                         idTaskUpdate = int.Parse(Console.ReadLine());
                         Console.WriteLine(s_dal.Task!.Read(idTaskUpdate).ToString());
                         Console.WriteLine("Enter details to update");//if null to put the same details
+                        taskAliasUpdate = Console.ReadLine(); 
                         taskDescriptionUpdate = Console.ReadLine();
-                        taskAliasUpdate = Console.ReadLine();
-                        taskMilestoneUpdate = bool.Parse(Console.ReadLine());
-                        taskCreateAtUpdate = DateTime.Parse(Console.ReadLine());
-                        taskStartUpdate = DateTime.Parse(Console.ReadLine());
+                        taskCreateAtDateUpdate = DateTime.Parse(Console.ReadLine());
+                        taskRequiredEffortTimeUpdate = TimeSpan.Parse(Console.ReadLine());
+                        taskIsMilestoneUpdate = bool.Parse(Console.ReadLine());
+                        taskStartDateUpdate = DateTime.Parse(Console.ReadLine());
                         taskScheduledDateUpdate = DateTime.Parse(Console.ReadLine());
-                        taskForecastDateUpdate = DateTime.Parse(Console.ReadLine());
-                        taskDeadlineUpdate = DateTime.Parse(Console.ReadLine());
-                        taskCompleteUpdate = DateTime.Parse(Console.ReadLine());
+                        taskDeadlineDateUpdate = DateTime.Parse(Console.ReadLine());
+                        taskCompleteDateUpdate = DateTime.Parse(Console.ReadLine());
                         taskDeliverablesUpdate = Console.ReadLine();
                         taskRemarksUpdate = Console.ReadLine();
                         taskEngineerIdUpdate = int.Parse(Console.ReadLine());
                         currentTaskNumUpdate = int.Parse(Console.ReadLine());
                         switch (currentTaskNumUpdate)
                         {
-                            case 1: taskLevelUpdate = EngineerExperience.Novice; break;
-                            case 2: taskLevelUpdate = EngineerExperience.AdvancedBeginner; break;
-                            case 3: taskLevelUpdate = EngineerExperience.Competent; break;
-                            case 4: taskLevelUpdate = EngineerExperience.Proficient; break;
-                            case 5: taskLevelUpdate = EngineerExperience.Expert; break;
-                            default: taskLevelUpdate = EngineerExperience.Expert; break;
+                            case 1: taskCopmlexityUpdate = EngineerExperience.Novice; break;
+                            case 2: taskCopmlexityUpdate = EngineerExperience.AdvancedBeginner; break;
+                            case 3: taskCopmlexityUpdate = EngineerExperience.Competent; break;
+                            case 4: taskCopmlexityUpdate = EngineerExperience.Proficient; break;
+                            case 5: taskCopmlexityUpdate = EngineerExperience.Expert; break;
+                            default: taskCopmlexityUpdate = EngineerExperience.Expert; break;
                         }
-                        DO.Task newTaskUpdate = new(idTaskUpdate, taskDescriptionUpdate, taskAliasUpdate, taskMilestoneUpdate, taskCreateAtUpdate, taskStartUpdate, taskScheduledDateUpdate, taskForecastDateUpdate, taskDeadlineUpdate, taskCompleteUpdate, taskDeliverablesUpdate, taskRemarksUpdate, taskEngineerIdUpdate, taskLevelUpdate);
+                        DO.Task newTaskUpdate = new(idTaskUpdate,taskAliasUpdate, taskDescriptionUpdate, taskCreateAtDateUpdate, taskRequiredEffortTimeUpdate, taskIsMilestoneUpdate, taskStartDateUpdate, taskScheduledDateUpdate, taskDeadlineDateUpdate, taskCompleteDateUpdate, taskDeliverablesUpdate, taskRemarksUpdate, taskEngineerIdUpdate, taskCopmlexityUpdate);
                         s_dal.Task!.Update(newTaskUpdate);
                         break;
                     case 5:

@@ -139,13 +139,13 @@ public static class Initialization
            tasksDescription.Select(_description =>
            {
                string _alias = "dd";
-               bool _milestone = false;
-               DateTime _createdAt = DateTime.Now.AddDays(-30);
-               DateTime? _start = null;
+               DateTime _createdAtDate = DateTime.Now.AddDays(-30);
+               TimeSpan? _requiredEffortTime = null;               
+               bool _isMilestone = false;
+               DateTime? _startDate = null;
                DateTime? _scheduledDate = null;
-               DateTime? _forecastDate = null;
-               DateTime? _deadLine = null;
-               DateTime? _complete = null;
+               DateTime? _deadLineDate = null;
+               DateTime? _completeDate = null;
                string? _deriverables = null;
                string? _remarks = null;
                int? _engineerId;
@@ -161,7 +161,7 @@ public static class Initialization
                x = s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
                _copmlexityLevel = (EngineerExperience)x;
 
-               return new Task(0, _description, _alias, _milestone, _createdAt, _start, _scheduledDate, _forecastDate, _deadLine, _complete, _deriverables, _remarks, _engineerId, _copmlexityLevel);
+               return new Task(0, _alias,_description, _createdAtDate, _requiredEffortTime, _isMilestone, _startDate, _scheduledDate, _deadLineDate, _completeDate, _deriverables, _remarks, _engineerId, _copmlexityLevel);
 
            });
         tasks.ToList().ForEach(task => s_dal.Task!.Create(task));

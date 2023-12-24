@@ -22,21 +22,21 @@ namespace DO;
 public record Task
 (
     int Id,
-    string Description,
     string Alias,
-    bool Milestone,
-    DateTime CreatedAt,
-    DateTime? Start,  
+    string Description,
+    DateTime CreatedAtDate,
+    TimeSpan? RequiredEffortTime,
+    bool IsMilestone,    
+    DateTime? StartDate,  
     DateTime? ScheduledDate,
-    DateTime? ForecastDate,
-    DateTime? DeadLine,
-    DateTime? Complete,
+    DateTime? DeadLineDate,
+    DateTime? CompleteDate,
     string? Deriverables,
     string? Remarks,
-    int? EngineerId,
-    EngineerExperience CopmlexityLevel
+    int? EngineerId   ,
+    EngineerExperience? Copmlexity
 )
 {
-    public Task() : this(0, "", "", false, DateTime.MinValue, null,null,null,null,null,"","",0, EngineerExperience.Competent) { }
+    public Task() : this(0, "", "", DateTime.MinValue, null, false, null, null, null, null, "", "", 0, EngineerExperience.Competent) { }
 }
 

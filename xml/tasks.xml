@@ -1,83 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Task>
-    <Id>2</Id>
-    <Description>Task 2 Description</Description>
-    <Alias>Task2Alias</Alias>
-    <Milestone>false</Milestone>
-    <CreatedAt>0001-01-01T00:00:00</CreatedAt>
-    <Start xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <ForecastDate xsi:nil="true" />
-    <DeadLine xsi:nil="true" />
-    <Complete xsi:nil="true" />
-    <Deriverables />
-    <Remarks />
-    <EngineerId>0</EngineerId>
-    <CopmlexityLevel>Competent</CopmlexityLevel>
-  </Task>
-  <Task>
-    <Id>3</Id>
-    <Description>Task 3 Description</Description>
-    <Alias>Task3Alias</Alias>
-    <Milestone>false</Milestone>
-    <CreatedAt>0001-01-01T00:00:00</CreatedAt>
-    <Start xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <ForecastDate xsi:nil="true" />
-    <DeadLine xsi:nil="true" />
-    <Complete xsi:nil="true" />
-    <Deriverables />
-    <Remarks />
-    <EngineerId>0</EngineerId>
-    <CopmlexityLevel>Competent</CopmlexityLevel>
-  </Task>
-  <Task>
-    <Id>4</Id>
-    <Description>Task 4 Description</Description>
-    <Alias>Task4Alias</Alias>
-    <Milestone>false</Milestone>
-    <CreatedAt>0001-01-01T00:00:00</CreatedAt>
-    <Start xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <ForecastDate xsi:nil="true" />
-    <DeadLine xsi:nil="true" />
-    <Complete xsi:nil="true" />
-    <Deriverables />
-    <Remarks />
-    <EngineerId>0</EngineerId>
-    <CopmlexityLevel>Competent</CopmlexityLevel>
-  </Task>
-  <Task>
-    <Id>5</Id>
-    <Description>Task 5 Description</Description>
-    <Alias>Task5Alias</Alias>
-    <Milestone>false</Milestone>
-    <CreatedAt>0001-01-01T00:00:00</CreatedAt>
-    <Start xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <ForecastDate xsi:nil="true" />
-    <DeadLine xsi:nil="true" />
-    <Complete xsi:nil="true" />
-    <Deriverables />
-    <Remarks />
-    <EngineerId>0</EngineerId>
-    <CopmlexityLevel>Competent</CopmlexityLevel>
-  </Task>
-  <Task>
-    <Id>1</Id>
-    <Description>a</Description>
-    <Alias>a</Alias>
-    <Milestone>true</Milestone>
-    <CreatedAt>0001-01-01T00:00:00</CreatedAt>
-    <Start>0001-01-01T00:00:00</Start>
-    <ScheduledDate>0001-01-01T00:00:00</ScheduledDate>
-    <ForecastDate>0001-01-01T00:00:00</ForecastDate>
-    <DeadLine>0001-01-01T00:00:00</DeadLine>
-    <Complete>0001-01-01T00:00:00</Complete>
-    <Deriverables>w</Deriverables>
-    <Remarks>s</Remarks>
-    <EngineerId>12</EngineerId>
-    <CopmlexityLevel>Competent</CopmlexityLevel>
-  </Task>
+	<Task>
+		<Id>2</Id>
+		<Alias>Task2Alias</Alias>
+		<Description>Task2Description</Description>
+		<CreatedAtDate>0001-01-01T00:00:00</CreatedAtDate>
+		<IsMilestone>false</IsMilestone>
+	</Task>
+	<Task>
+		<Id>3</Id>
+		<Alias>Task3Alias</Alias>
+		<Description>Task3Description</Description>
+		<CreatedAtDate>0001-01-01T00:00:00</CreatedAtDate>
+		<IsMilestone>false</IsMilestone>
+	</Task>
+	<Task>
+		<Id>4</Id>
+		<Alias>Task4Alias</Alias>
+		<Description>Task4Description</Description>
+		<CreatedAtDate>0001-01-01T00:00:00</CreatedAtDate>
+		<IsMilestone>false</IsMilestone>
+	</Task>
+	<Task>
+		<Id>5</Id>
+		<Alias>Task5Alias</Alias>
+		<Description>Task5Description</Description>
+		<CreatedAtDate>0001-01-01T00:00:00</CreatedAtDate>
+		<IsMilestone>false</IsMilestone>
+	</Task>
+	<Task>
+		<Id>1</Id>
+		<Alias>Task1Alias</Alias>
+		<Description>Task1Description</Description>
+		<CreatedAtDate>0001-01-01T00:00:00</CreatedAtDate>
+		<IsMilestone>false</IsMilestone>
+	</Task>
 </ArrayOfTask>
