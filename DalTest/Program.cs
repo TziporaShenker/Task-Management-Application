@@ -43,7 +43,7 @@ namespace DalTest
                         EngineerExperience levelEngineer;
                         double costEngineer;
                         idEngineer = int.Parse(Console.ReadLine());
-                        nameEngineer = (Console.ReadLine());
+                        nameEngineer = Console.ReadLine();
                         emailEngineer = Console.ReadLine();
                         costEngineer = double.Parse(Console.ReadLine());
                         currentNum = int.Parse(Console.ReadLine());
@@ -207,36 +207,50 @@ namespace DalTest
                 {
   
                     case 1:
-                        Console.WriteLine("Enter description, alias, deriverables, remarks, milestone,engineerId, dates and task's level");
-                        int taskEngineerId, currentTaskNum;
-                        string  taskAlias,taskDescription, taskDeliverables, taskRemarks;
-                        bool taskIsMilestone;
-                        DateTime taskCreateAtDate, taskStartDate, taskScheduledDate, taskDeadlineDate, taskCompleteDate;
-                        TimeSpan taskRequiredEffortTime;
-                        EngineerExperience taskCopmlexity;
-                        taskAlias = Console.ReadLine();
-                        taskDescription = Console.ReadLine();
-                        taskCreateAtDate = DateTime.Parse(Console.ReadLine());
-                        taskRequiredEffortTime=TimeSpan.Parse(Console.ReadLine());                                              
-                        taskIsMilestone = bool.Parse(Console.ReadLine());
-                        taskStartDate = DateTime.Parse(Console.ReadLine());
-                        taskScheduledDate = DateTime.Parse(Console.ReadLine());
-                        taskDeadlineDate = DateTime.Parse(Console.ReadLine());
-                        taskCompleteDate = DateTime.Parse(Console.ReadLine());
-                        taskDeliverables = Console.ReadLine();
-                        taskRemarks = Console.ReadLine();
-                        taskEngineerId = int.Parse(Console.ReadLine());
-                        currentTaskNum = int.Parse(Console.ReadLine());
-                        switch (currentTaskNum)
-                        {
-                            case 1: taskCopmlexity = EngineerExperience.Expert; break;
-                            case 2: taskCopmlexity = EngineerExperience.Proficient; break;
-                            case 3: taskCopmlexity = EngineerExperience.Competent; break;
-                            case 4: taskCopmlexity = EngineerExperience.AdvancedBeginner; break;
-                            case 5: taskCopmlexity = EngineerExperience.Novice; break;
-                            default: taskCopmlexity = EngineerExperience.Expert; break;
-                        }
-                        s_dal.Task.Create(new DO.Task(0, taskAlias,taskDescription, taskCreateAtDate, taskRequiredEffortTime,taskIsMilestone,  taskStartDate, taskScheduledDate, taskDeadlineDate, taskCompleteDate, taskDeliverables, taskRemarks, taskEngineerId, taskCopmlexity));
+                        Console.WriteLine("Enter task information:");
+
+                        Console.Write("Alias: ");
+                        string taskAlias = Console.ReadLine();
+
+                        Console.Write("Description: ");
+                        string taskDescription = Console.ReadLine();
+
+                        Console.Write("CreatedAtDate: ");
+                        DateTime taskCreatedAtDate = DateTime.Parse(Console.ReadLine());
+
+                        Console.Write("RequiredEffortTime (HH:mm): ");
+                        TimeSpan? taskRequiredEffortTime = TimeSpan.Parse(Console.ReadLine());
+
+                        Console.Write("IsMilestone (true/false): ");
+                        bool taskIsMilestone = bool.Parse(Console.ReadLine());
+
+                        Console.Write("StartDate: ");
+                        DateTime? taskStartDate = DateTime.Parse(Console.ReadLine());
+
+                        Console.Write("ScheduledDate: ");
+                        DateTime? taskScheduledDate = DateTime.Parse(Console.ReadLine());
+
+                        Console.Write("DeadlineDate: ");
+                        DateTime? taskDeadlineDate = DateTime.Parse(Console.ReadLine());
+
+                        Console.Write("CompleteDate: ");
+                        DateTime? taskCompleteDate = DateTime.Parse(Console.ReadLine());
+
+                        Console.Write("Deriverables: ");
+                        string taskDeriverables = Console.ReadLine();
+
+                        Console.Write("Remarks: ");
+                        string taskRemarks = Console.ReadLine();
+
+                        Console.Write("EngineerId: ");
+                        int taskEngineerId = int.Parse(Console.ReadLine());
+
+                        Console.Write("Task's Level (0 for Easy, 1 for Moderate, 2 for Complex): ");
+                        int taskComplexityLevel = int.Parse(Console.ReadLine());
+                        EngineerExperience taskComplexity = (EngineerExperience)taskComplexityLevel;
+
+                        Console.Write("Current Task Number: ");
+                        s_dal.Task.Create(new DO.Task(0, taskAlias,taskDescription, taskCreatedAtDate, taskRequiredEffortTime,taskIsMilestone,  taskStartDate, taskScheduledDate, taskDeadlineDate, taskCompleteDate, taskDeriverables, taskRemarks, taskEngineerId, taskComplexity));
                         break;
                     case 2:
                         int id;
@@ -276,7 +290,7 @@ namespace DalTest
                         string taskAliasUpdate,taskDescriptionUpdate,  taskDeliverablesUpdate, taskRemarksUpdate;
                         bool taskIsMilestoneUpdate;
                         DateTime taskCreateAtDateUpdate, taskStartDateUpdate, taskScheduledDateUpdate, taskDeadlineDateUpdate, taskCompleteDateUpdate;
-                        TimeSpan taskRequiredEffortTimeUpdate;
+                        TimeSpan? taskRequiredEffortTimeUpdate;
                         EngineerExperience taskCopmlexityUpdate;
 
 

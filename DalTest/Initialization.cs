@@ -20,6 +20,7 @@ public static class Initialization
 
     private static IDal? s_dal; //stage 2
 
+
     private static readonly Random s_rand = new();
     /// <summary>
     /// A function that initializes the engineer entity list with data
@@ -138,7 +139,7 @@ public static class Initialization
         var tasks =
            tasksDescription.Select(_description =>
            {
-               string _alias = "dd";
+               string _alias = _description.Split(' ').FirstOrDefault();
                DateTime _createdAtDate = DateTime.Now.AddDays(-30);
                TimeSpan? _requiredEffortTime = null;               
                bool _isMilestone = false;
