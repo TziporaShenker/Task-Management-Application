@@ -9,6 +9,8 @@ using System.Xml.Serialization;
 internal class DependencyImplementation : IDependency      
 {
     const string dependenciesFile = @"dependencies";
+    const string data_config_xml = @"data-config";
+
 
     public int Create(Dependency item)
     {
@@ -98,9 +100,13 @@ internal class DependencyImplementation : IDependency
 
     public void Reset()
     {
+        XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
+        root.Element("NextDependencyId")?.SetValue((1).ToString());
+        XMLTools.SaveListToXMLElement(root, data_config_xml);
         XElement dependenciesElement = XMLTools.LoadListFromXMLElement(dependenciesFile);
         dependenciesElement.RemoveAll();
         XMLTools.SaveListToXMLElement(dependenciesElement, dependenciesFile);
+       
     }
 
     public void Update(Dependency item)

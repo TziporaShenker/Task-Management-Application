@@ -224,7 +224,8 @@ public static class Initialization
         //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!"); //stage 1
 
         s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
-
+        s_dal.Reset();
+        
         createEngineers();
         createTasks();
         createDependencies();

@@ -12,6 +12,7 @@ internal class TaskImplementation : ITask
 {
     const string tasksFile = @"tasks";
     const string dependenciesFile = @"dependencies";
+    const string data_config_xml = @"data-config";
 
     public int Create(Task item)
     {
@@ -71,9 +72,13 @@ internal class TaskImplementation : ITask
 
     public void Reset()
     {
+        XElement root = XMLTools.LoadListFromXMLElement(data_config_xml);
+        root.Element("NextTaskId")?.SetValue((1).ToString());
+        XMLTools.SaveListToXMLElement(root, data_config_xml);
         List<Task> tasks = XMLTools.LoadListFromXMLSerializer<Task>(tasksFile);
         tasks.Clear();
         XMLTools.SaveListToXMLSerializer<Task>(tasks, tasksFile);
+      
     }
 
     public void Update(Task item)
