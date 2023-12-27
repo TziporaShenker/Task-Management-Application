@@ -16,7 +16,8 @@ namespace DalTest
         //private static ITask? s_dalTask = new TaskImplementation(); //stage 1
 
         //static readonly IDal s_dal = new Dal.DalList(); //stage 2
-        static readonly IDal s_dal = new DalXml(); //stage 3
+        //static readonly IDal s_dal = new DalXml(); //stage 3
+        static readonly IDal s_dal = Factory.Get; //stage 4
 
         /// <summary>
         /// A function that allows operations to be performed on the engineer entity
@@ -27,11 +28,11 @@ namespace DalTest
             do
             {
                 Console.WriteLine("for exit press 0\n" +
-                          "for add an order press 1\n" +
-                          "for read an order press 2\n" +
-                          "for read all orders press 3\n" +
-                          "for update an order press 4\n" +
-                          "for delete an order press 5\n");
+                          "for add an engineer press 1\n" +
+                          "for read an engineer press 2\n" +
+                          "for read all engineers press 3\n" +
+                          "for update an engineer press 4\n" +
+                          "for delete an engineer press 5\n");
                 chooseSubMenu = int.Parse(Console.ReadLine());
 
                 switch (chooseSubMenu)
@@ -124,11 +125,11 @@ namespace DalTest
             do
             {
                 Console.WriteLine("for exit press 0\n" +
-                          "for add an order press 1\n" +
-                          "for read an order press 2\n" +
-                          "for read all orders press 3\n" +
-                          "for update an order press 4\n" +
-                          "for delete an order press 5\n");
+                          "for add an dependency press 1\n" +
+                          "for read an dependency press 2\n" +
+                          "for read all dependencies press 3\n" +
+                          "for update an dependency press 4\n" +
+                          "for delete an dependency press 5\n");
                 chooseSubMenu = int.Parse(Console.ReadLine());
 
                 switch (chooseSubMenu)
@@ -197,11 +198,11 @@ namespace DalTest
             do
             {
                 Console.WriteLine("for exit press 0\n" +
-                          "for add an order press 1\n" +
-                          "for read an order press 2\n" +
-                          "for read all orders press 3\n" +
-                          "for update an order press 4\n" +
-                          "for delete an order press 5\n");
+                          "for add an task press 1\n" +
+                          "for read an task press 2\n" +
+                          "for read all tasks press 3\n" +
+                          "for update an task press 4\n" +
+                          "for delete an task press 5\n");
                 chooseSubMenu = int.Parse(Console.ReadLine());
                 switch (chooseSubMenu)
                 {
@@ -357,8 +358,8 @@ namespace DalTest
                 Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
                 string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
                 if (ans == "Y") //stage 3
-                    Initialization.Do(s_dal); //stage 2
-
+                    //Initialization.Do(s_dal); //stage 2
+                    Initialization.Do(); //stage 4
                 int chooseEntity;
                 do
                 {

@@ -217,16 +217,19 @@ public static class Initialization
     /// <exception cref="NullReferenceException"></exception>
 
     //public static void Do(IDependency? dalDependency, IEngineer? dalEngineer, ITask? dalTask) //stage 1
-    public static void Do(IDal dal) //stage 2
+    
+    //public static void Do(IDal dal) //stage 2
+    public static void Do()
     {
 
         //s_dalDependency  = dalDependency ?? throw new NullReferenceException("DAL can not be null!"); //stage 1
         //s_dalEngineer = dalEngineer ?? throw new NullReferenceException("DAL can not be null!"); //stage 1
         //s_dalTask = dalTask ?? throw new NullReferenceException("DAL can not be null!"); //stage 1
 
-        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal = DalApi.Factory.Get; //stage 4
         s_dal.Reset();
-        
+
         createEngineers();
         createTasks();
         createDependencies();
