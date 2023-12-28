@@ -1,7 +1,9 @@
 ﻿
+using BlApi;
+
 namespace BlImplementation;
 
-internal class ScheduleImplementation
+internal class ScheduleImplementation:ISchedule
 {
    //        קלט : רשימת תלויות של משימות
   //פלט : רשימת תלויות חדשה בין אבני דרך ומשימות

@@ -47,8 +47,19 @@ internal class TaskImplementation : ITask
             Alias = doTask.Alias,
             Description = doTask.Description,
             CreatedAtDate = doTask.CreatedAtDate,
-            Status=BO.Status.Unscheduled//נדרש חישוב
-            
+            Status=BO.Status.Unscheduled,//נדרש חישוב
+            Dependencies=null,//נדרש חישוב
+            Milestone =null,//נדרש חישוב
+            RequiredEffortTime=doTask.RequiredEffortTime,
+            StartDate=doTask.StartDate,
+            ScheduledDate=doTask.ScheduledDate,
+            ForecastDate= doTask.StartDate+ doTask.RequiredEffortTime,
+            DeadlineDate=doTask.DeadLineDate,
+            CompleteDate=doTask.CompleteDate,
+            Deliverables=doTask.Deliverables,
+            Remarks=doTask.Remarks,
+            Engineer=null,//נדרש חישוב
+            Copmlexity= (BO.EngineerExperience?)doTask.Copmlexity
         };
     }
 
@@ -59,11 +70,33 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<BO.Task?> ReadAll(Func<BO.Task, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        return (IEnumerable<BO.Task?>)(from DO.Task doTask in _dal.Task.ReadAll()
+                select new BO.TaskInList
+                {
+                    Id = doTask.Id,
+                    Description = doTask.Description,
+                    Alias = doTask.Alias,
+                    Status = null
+                });
+
     }
 
-    public void Update(BO.Task item)
+    public void Update(BO.Task boTask)
     {
-        throw new NotImplementedException();
+        if (Read(boTask.Id) is null)
+            throw new BO.BlDoesNotExistException($"Task with ID={boTask.Id} does Not exist");
+
+        DO.Task doTask = new DO.Task
+                (boTask.Id, boTask.Alias, boTask.Description, boTask.CreatedAtDate, boTask.RequiredEffortTime, false, boTask.StartDate, boTask.ScheduledDate, boTask.DeadlineDate, boTask.CompleteDate, boTask.Deliverables, boTask.Remarks, null, (DO.EngineerExperience?)boTask.Copmlexity);
+        try
+        {
+            _dal.Task.Update(doTask);
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+        
     }
 }
