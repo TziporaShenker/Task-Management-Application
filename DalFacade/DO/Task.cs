@@ -31,7 +31,7 @@ public record Task
     DateTime? ScheduledDate,
     DateTime? DeadLineDate,
     DateTime? CompleteDate,
-    string? Deriverables,
+    string? Deliverables,
     string? Remarks,
     int? EngineerId   ,
     EngineerExperience? Copmlexity

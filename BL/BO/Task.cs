@@ -6,21 +6,21 @@ namespace BO;
 
 public class Task
 {
-    int Id { get; init; }
-    string Description { get; set; }
-    string Alias { get; set; }
-    DateTime CreatedAtDate { get; set; }
-    Status? Status { get; set; }
-    TaskInList? Dependencies { get; set; }
-    MilestoneInTask? Milestone { get; set; }
-    TimeSpan? RequiredEffortTime { get; set; }
-    DateTime? StartDate { get; set; }
-    DateTime? ScheduledDate { get; set; }
-    DateTime? ForecastDate { get; set; }
-    DateTime? DeadlineDate { get; set; }
-    DateTime? CompleteDate { get; set; }
-    string? Deliverables { get; set; }
-    string? Remarks { get; set; }
-    EngineerInTask? Engineer { get; set; }
-    EngineerExperience? Copmlexity { get; set; }
+    public int Id { get; init; }
+    public string Alias { get; set; }
+    public string Description { get; set; }
+    public DateTime CreatedAtDate { get; set; }
+    public Status? Status { get; set; }
+    List<TaskInList>? Dependencies { get; set; }
+    public MilestoneInTask? Milestone { get; set; }
+    public TimeSpan? RequiredEffortTime { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? ScheduledDate { get; set; }
+    public DateTime? ForecastDate { get; set; }
+    public DateTime? DeadlineDate { get; set; }
+    public DateTime? CompleteDate { get; set; }
+    public string? Deliverables { get; set; }
+    public string? Remarks { get; set; }
+    public EngineerInTask? Engineer { get; set; }
+    public EngineerExperience? Copmlexity { get; set; }
 }

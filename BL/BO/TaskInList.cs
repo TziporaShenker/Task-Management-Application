@@ -4,9 +4,9 @@ namespace BO;
 
 public class TaskInList
 {
-    int Id { get; init; }
-    string Description { get; set; }
-    string Alias { get; set; }
-    Status? Status { get; set; }
+    public int Id { get; init; }
+    public string Description { get; set; }
+    public string Alias { get; set; }
+    public Status? Status { get; set; }
 
 }

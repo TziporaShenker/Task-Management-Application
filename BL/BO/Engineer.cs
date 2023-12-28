@@ -2,10 +2,10 @@
 
 public class Engineer
 {
-    int Id { get; init; }
-    string Name { get; set; }
-    string Email { get; set; }
-    EngineerExperience Level { get; set; }
-    double Cost { get; set; }
+    public int Id { get; init; }
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public EngineerExperience Level { get; set; }
+    public double Cost { get; set; }
     TaskInEngineer Task { get; set; }
 }
