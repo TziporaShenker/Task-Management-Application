@@ -21,6 +21,6 @@ public class Task
     public DateTime? CompleteDate { get; set; }//סיום בפועל
     public string? Deliverables { get; set; } 
     public string? Remarks { get; set; } 
-    public EngineerInTask? Engineer { get; set; }
+    public Tuple<int, string>? Engineer { get; set; }
     public EngineerExperience? Copmlexity { get; set; }
 }

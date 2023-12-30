@@ -172,8 +172,8 @@ public static class Initialization
     /// </summary>
     private static void createDependencies()
     {
-        int? _dependentTask;
-        int? _dependsOnTask;
+        int _dependentTask;
+        int _dependsOnTask;
         int x;
         IEnumerable<Task?> tasksList = s_dal.Task.ReadAll();
 

@@ -3,6 +3,6 @@ namespace BO;
 
 public class EngineerInTask
 {
-    int Id { get; init; }
-    string Name { get; set; }
+    public int Id { get; init; }
+    public string Name { get; set; }
 }

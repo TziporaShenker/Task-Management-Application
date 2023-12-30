@@ -11,6 +11,5 @@ internal class Bl : IBl
 
     public IMilestone Milestone => new MilestoneImplementation();
 
-    public ISchedule Schedule => new ScheduleImplementation(); 
 }
  

@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using DO;
+using System.Collections.Generic;
 
 namespace BlImplementation;
 
@@ -17,7 +18,7 @@ internal class EngineerImplementation : IEngineer
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException($"engineer with ID={boEngineer.Id} already exists", ex);
+            throw new BO.BlAlreadyExistsException(ex.Message, ex);
         }
     }
 
@@ -25,12 +26,12 @@ internal class EngineerImplementation : IEngineer
     {
         try
         {
-        _dal.Engineer.Delete(id);
+           _dal.Engineer.Delete(id);
 
         }
         catch (DO.DalDeletionImpossible ex)
         {
-            throw new BO.BlDeletionImpossible($"engineer with ID={id} already exists", ex);
+            throw new BO.BlDeletionImpossible(ex.Message, ex);
         }
     }
 
@@ -39,7 +40,7 @@ internal class EngineerImplementation : IEngineer
 
         DO.Engineer? doEngineer = _dal.Engineer.Read(id);
         if (doEngineer == null)
-            throw new BO.BlDoesNotExistException($"Student with ID={id} does Not exist");
+            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
 
         return new BO.Engineer()
         {
@@ -48,6 +49,7 @@ internal class EngineerImplementation : IEngineer
             Email = doEngineer.Email,
             Level = (BO.EngineerExperience)doEngineer.Level,
             Cost = doEngineer.Cost,
+            Task = ReadTaskInEngineer(id),
         };
     }
 
@@ -58,11 +60,37 @@ internal class EngineerImplementation : IEngineer
 
     public IEnumerable<BO.Engineer?> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
-        throw new NotImplementedException();
+        return (IEnumerable<BO.Engineer?>)(
+            from DO.Engineer doEngineer in _dal.Engineer.ReadAll((Func<DO.Engineer, bool>?)filter)
+            select Read(doEngineer.Id));
     }
 
-    public void Update(BO.Engineer item)
+    public void Update(BO.Engineer boEngineer)
     {
-        throw new NotImplementedException();
+        if (Read(boEngineer.Id) is null)
+            throw new BO.BlDoesNotExistException($"Task with ID={boEngineer.Id} does Not exist");
+
+        DO.Engineer doEngineer = new DO.Engineer
+                (boEngineer.Id, boEngineer.Name, boEngineer.Email, (DO.EngineerExperience)boEngineer.Level, boEngineer.Cost);
+        try
+        {
+            _dal.Engineer.Update(doEngineer);
+        }
+        catch (Exception ex)
+        {
+            throw new BO.BlDoesNotExistException(ex.Message, ex);
+        }
+    }
+    public Tuple<int, string>? ReadTaskInEngineer(int id)
+    {
+
+        return (Tuple<int, string>?)(
+            from DO.Task doTask in _dal.Task.ReadAll()
+            where (doTask.Id == id&& doTask.StartDate<=DateTime.Today&& doTask.CompleteDate >= DateTime.Today)
+            select new BO.TaskInEngineer()
+            {
+                Id= doTask.Id,
+                Alias= doTask.Alias,
+            });
     }
 }

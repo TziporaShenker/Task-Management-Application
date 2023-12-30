@@ -1,6 +1,7 @@
 ﻿
 using BlApi;
-
+using BO;
+using DO;
 
 namespace BlImplementation;
 internal class TaskImplementation : ITask
@@ -18,7 +19,7 @@ internal class TaskImplementation : ITask
         }
         catch (DO.DalAlreadyExistsException ex)
         {
-            throw new BO.BlAlreadyExistsException($"task with ID={boTask.Id} already exists", ex);
+            throw new BO.BlAlreadyExistsException(ex.Message, ex);
         }
     }
 
@@ -31,7 +32,7 @@ internal class TaskImplementation : ITask
         }
         catch (DO.DalDeletionImpossible ex)
         {
-            throw new BO.BlDeletionImpossible($"task with ID={id} already exists", ex);
+            throw new BO.BlDeletionImpossible(ex.Message, ex);
         }
     }
 
@@ -48,7 +49,7 @@ internal class TaskImplementation : ITask
             Description = doTask.Description,
             CreatedAtDate = doTask.CreatedAtDate,
             Status=BO.Status.Unscheduled,//נדרש חישוב
-            Dependencies=null,//נדרש חישוב
+            Dependencies= ReadDependencies(id),//נדרש חישוב
             Milestone =null,//נדרש חישוב
             RequiredEffortTime=doTask.RequiredEffortTime,
             StartDate=doTask.StartDate,
@@ -58,7 +59,7 @@ internal class TaskImplementation : ITask
             CompleteDate=doTask.CompleteDate,
             Deliverables=doTask.Deliverables,
             Remarks=doTask.Remarks,
-            Engineer=null,//נדרש חישוב
+            Engineer= ReadEngineerInTask(doTask.EngineerId),
             Copmlexity= (BO.EngineerExperience?)doTask.Copmlexity
         };
     }
@@ -70,15 +71,9 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<BO.Task?> ReadAll(Func<BO.Task, bool>? filter = null)
     {
-        return (IEnumerable<BO.Task?>)(from DO.Task doTask in _dal.Task.ReadAll()
-                select new BO.TaskInList
-                {
-                    Id = doTask.Id,
-                    Description = doTask.Description,
-                    Alias = doTask.Alias,
-                    Status = null
-                });
-
+        return (IEnumerable<BO.Task?>)(
+            from DO.Task doTask in _dal.Task.ReadAll((Func<DO.Task, bool>?)filter)
+            select Read(doTask.Id));
     }
 
     public void Update(BO.Task boTask)
@@ -92,11 +87,37 @@ internal class TaskImplementation : ITask
         {
             _dal.Task.Update(doTask);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
 
-            throw;
+            throw new BO.BlDoesNotExistException(ex.Message ,ex);
         }
-        
+
+    }
+    public Tuple<int, string>? ReadEngineerInTask(int? engineerId)
+    {
+
+        return (Tuple<int, string>?)(
+            from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
+            where (doEngineer.Id == engineerId)
+            select new BO.EngineerInTask()
+            {
+                Id = doEngineer.Id,
+                Name = doEngineer.Name,
+            });
+    }
+    public List<TaskInList>? ReadDependencies(int taskId)
+    {
+        return (
+            from DO.Dependency doDependency in _dal.Dependency.ReadAll()
+            where (doDependency.DependentTask == taskId)
+            let dependentTask = Read(doDependency.DependsOnTask)
+            select new BO.TaskInList()
+            {
+                Id = doDependency.DependsOnTask,
+                Description = dependentTask.Description,
+                Alias= dependentTask.Alias,
+                Status=null//נדרש חישוב
+            }).ToList() ;
     }
 }
