@@ -48,14 +48,14 @@ internal class TaskImplementation : ITask
             Alias = doTask.Alias,
             Description = doTask.Description,
             CreatedAtDate = doTask.CreatedAtDate,
-            Status=BO.Status.Unscheduled,//נדרש חישוב
-            Dependencies= ReadDependencies(id),//נדרש חישוב
+            Status = ReadStatus(id),
+            Dependencies= ReadDependencies(id),
             Milestone =null,//נדרש חישוב
             RequiredEffortTime=doTask.RequiredEffortTime,
             StartDate=doTask.StartDate,
             ScheduledDate=doTask.ScheduledDate,
             ForecastDate= doTask.StartDate+ doTask.RequiredEffortTime,
-            DeadlineDate=doTask.DeadLineDate,
+            DeadlineDate=doTask.DeadlineDate,
             CompleteDate=doTask.CompleteDate,
             Deliverables=doTask.Deliverables,
             Remarks=doTask.Remarks,
@@ -117,7 +117,29 @@ internal class TaskImplementation : ITask
                 Id = doDependency.DependsOnTask,
                 Description = dependentTask.Description,
                 Alias= dependentTask.Alias,
-                Status=null//נדרש חישוב
+                Status=ReadStatus(doDependency.DependsOnTask),
             }).ToList() ;
     }
+    public BO.Status ReadStatus(int taskId)
+    {
+        BO.Task? boTask = Read(taskId);
+        if (boTask.CompleteDate != null&&boTask.CompleteDate <= DateTime.Today)
+        {
+            return Status.Done;
+        }
+        else if (boTask.DeadlineDate != null && (DateTime)boTask.DeadlineDate >= DateTime.Today.AddDays(-7))
+        {
+            return Status.InJeopardy;
+        }
+        else if (boTask.StartDate != null&&boTask.StartDate<=DateTime.Today)
+        {
+            return Status.OnTrack;
+        }
+        else if (boTask.ScheduledDate != null)
+        {
+            return Status.Scheduled;
+        }
+        else { return Status.Unscheduled;}
+    }
+
 }

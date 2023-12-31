@@ -8,9 +8,9 @@ public enum EngineerExperience {
 }
 public enum Status
 {
-  Unscheduled,
-  Scheduled,
-  OnTrack,
-  InJeopardy,
-  Done,
+  Unscheduled,//לא משובץ
+  Scheduled,//בלו"ז
+  OnTrack,//בתהליך
+  InJeopardy,//דחוף!
+  Done,//נעשתה
 }

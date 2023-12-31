@@ -5,15 +5,16 @@ namespace BO;
 
 public class Milestone
 {
-    int Id { get; init; }
-    string Description { get; set; }
-    string Alias { get; set; }
-    DateTime CreatedAtDate { get; set; }
-    Status?  Status { get; set; }
-    DateTime? ForecastDate { get; set; }
-    DateTime? DeadlineDate { get; set; }
-    DateTime? CompleteDate { get; set; }
-    double? CompletionPercentage { get; set; }
-    string? Remarks { get; set; }
-    List<TaskInList>? Dependencies { get; set; }
+    public int Id { get; init; }
+    public string Description { get; set; }
+    public string Alias { get; set; }
+    public DateTime CreatedAtDate { get; set; }
+    public Status?  Status { get; set; }
+    public DateTime? StartDate { get; set; }
+    public DateTime? ForecastDate { get; set; }
+    public DateTime? DeadlineDate { get; set; }
+    public DateTime? CompleteDate { get; set; }
+    public double? CompletionPercentage { get; set; }
+    public string? Remarks { get; set; }
+    public List<TaskInList>? Dependencies { get; set; }
 }
