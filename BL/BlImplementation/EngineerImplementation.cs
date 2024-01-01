@@ -26,7 +26,7 @@ internal class EngineerImplementation : IEngineer
     {
         try
         {
-           _dal.Engineer.Delete(id);
+            _dal.Engineer.Delete(id);
 
         }
         catch (DO.DalDeletionImpossible ex)
@@ -60,9 +60,16 @@ internal class EngineerImplementation : IEngineer
 
     public IEnumerable<BO.Engineer?> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
-        return (IEnumerable<BO.Engineer?>)(
-            from DO.Engineer doEngineer in _dal.Engineer.ReadAll((Func<DO.Engineer, bool>?)filter)
-            select Read(doEngineer.Id));
+        return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll((Func<DO.Engineer, bool>?)filter)
+                select new BO.Engineer()
+                {
+                    Id = doEngineer.Id,
+                    Name = doEngineer.Name,
+                    Email = doEngineer.Email,
+                    Level = (BO.EngineerExperience)doEngineer.Level,
+                    Cost = doEngineer.Cost,
+                    Task = ReadTaskInEngineer(doEngineer.Id),
+                });
     }
 
     public void Update(BO.Engineer boEngineer)

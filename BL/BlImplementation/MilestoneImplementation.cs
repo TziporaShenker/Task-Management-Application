@@ -13,19 +13,28 @@ namespace BlImplementation;
 internal class MilestoneImplementation : IMilestone
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
-    public List<BO.TaskInList>? Create(int taskId)
-    {
+    public List<BO.TaskInList>? Create()
+    {//
+    //    var groupedDependencies = _dal.Dependency.ReadAll()
+    //.OrderBy(dep => dep?.DependsOnTask)
+    //.GroupBy(dep => dep?.DependentTask, dep => dep?.DependsOnTask, (id, dependency) => new { TaskId = id, Dependencies = dependency })
+    //.ToList();
         var groupedDependencies =
         from dependency in _dal.Dependency.ReadAll()
         group dependency by dependency.DependentTask into newGroup
         orderby newGroup.Key
-        select newGroup;
+        select new { Key = newGroup.Key, List = new List<>= };
 
-        var newGroupedDependencies =groupedDependencies.Distinct();
+        var distinctDependencies = groupedDependencies
+           .SelectMany(depGroup => depGroup.List)
+           .Where(dep => dep != null)
+           .Distinct()
+           .ToList();
+
 
         int id = 0;
         var mileStone =
-        from dependency in newGroupedDependencies
+        from dependency in distinctDependencies
         let task = _dal.Task.Read(dependency.Key)
         select new BO.Milestone()
         {
@@ -40,7 +49,7 @@ internal class MilestoneImplementation : IMilestone
             DeadlineDate = task.DeadlineDate,
             CompletionPercentage = 0,
             Remarks = task.Remarks,
-            Dependencies = ReadDependencies(id)
+            Dependencies = (List<TaskInList>)dependency.List
 
         };
 
@@ -66,43 +75,6 @@ internal class MilestoneImplementation : IMilestone
     public void Update(Milestone item)
     {
         throw new NotImplementedException();
-    }
-    public List<TaskInList>? ReadDependencies(int taskId)
-    {
-        return (
-            from DO.Dependency doDependency in _dal.Dependency.ReadAll()
-            where (doDependency.DependentTask == taskId)
-            let dependentTask = Read(doDependency.DependsOnTask)
-            select new BO.TaskInList()
-            {
-                Id = doDependency.DependsOnTask,
-                Description = dependentTask.Description,
-                Alias = dependentTask.Alias,
-                Status = ReadStatus(doDependency.DependsOnTask),
-            }).ToList();
-    }
-
-    public BO.Status ReadStatus(int taskId)
-    {
-        DO.Task? doTask = _dal.Task.Read(taskId) ;
-
-        if (doTask.CompleteDate != null && doTask.CompleteDate <= DateTime.Today)
-        {
-            return Status.Done;
-        }
-        else if (doTask.DeadlineDate != null && (DateTime)doTask.DeadlineDate >= DateTime.Today.AddDays(-7))
-        {
-            return Status.InJeopardy;
-        }
-        else if (doTask.StartDate != null && doTask.StartDate <= DateTime.Today)
-        {
-            return Status.OnTrack;
-        }
-        else if (doTask.ScheduledDate != null)
-        {
-            return Status.Scheduled;
-        }
-        else { return Status.Unscheduled; }
     }
 
 }

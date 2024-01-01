@@ -71,9 +71,27 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<BO.Task?> ReadAll(Func<BO.Task, bool>? filter = null)
     {
-        return (IEnumerable<BO.Task?>)(
-            from DO.Task doTask in _dal.Task.ReadAll((Func<DO.Task, bool>?)filter)
-            select Read(doTask.Id));
+        return from DO.Task doTask in _dal.Task.ReadAll((Func<DO.Task, bool>?)filter)
+               select new BO.Task()
+               {
+                   Id = doTask.Id,
+                   Alias = doTask.Alias,
+                   Description = doTask.Description,
+                   CreatedAtDate = doTask.CreatedAtDate,
+                   Status = ReadStatus(doTask.Id),
+                   Dependencies = ReadDependencies(doTask.Id),
+                   Milestone = null,//נדרש חישוב
+                   RequiredEffortTime = doTask.RequiredEffortTime,
+                   StartDate = doTask.StartDate,
+                   ScheduledDate = doTask.ScheduledDate,
+                   ForecastDate = doTask.StartDate + doTask.RequiredEffortTime,
+                   DeadlineDate = doTask.DeadlineDate,
+                   CompleteDate = doTask.CompleteDate,
+                   Deliverables = doTask.Deliverables,
+                   Remarks = doTask.Remarks,
+                   Engineer = ReadEngineerInTask(doTask.EngineerId),
+                   Copmlexity = (BO.EngineerExperience?)doTask.Copmlexity
+               };
     }
 
     public void Update(BO.Task boTask)
