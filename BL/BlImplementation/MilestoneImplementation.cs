@@ -14,43 +14,79 @@ internal class MilestoneImplementation : IMilestone
 {
     private DalApi.IDal _dal = DalApi.Factory.Get;
     public List<BO.TaskInList>? Create()
-    {//
-     //    var groupedDependencies = _dal.Dependency.ReadAll()
-     //.OrderBy(dep => dep?.DependsOnTask)
-     //.GroupBy(dep => dep?.DependentTask, dep => dep?.DependsOnTask, (id, dependency) => new { TaskId = id, Dependencies = dependency })
-     //.ToList();
-        var groupedDependencies =
-        from dependency in _dal.Dependency.ReadAll()
-        group dependency by dependency.DependentTask into newGroup
-        orderby newGroup.Key
-        select new { Key = newGroup.Key, List = new List<TaskInList> };
+    {
+        var groupedDependencies = _dal.Dependency.ReadAll()
+        .OrderBy(dep => dep?.DependsOnTask)
+        .GroupBy(dep => dep.DependentTask, dep => dep.DependsOnTask,
+        (id, dependency) => new { TaskId = id, Dependencies = dependency })
+        .ToList();
 
         var distinctDependencies = groupedDependencies
-           .SelectMany(depGroup => depGroup.List)
-           .Where(dep => dep != null)
-           .Distinct()
-           .ToList();
+       //.Select(depGroup => new { TaskId = depGroup.TaskId, Dependencies = depGroup.Dependencies })
+       .GroupBy(dep => dep.Dependencies,
+        (key, group) => group.First())
+       .ToList();
+        //var distinctDependencies2 = new List<dynamic>();
 
+        //foreach (var depGroup in groupedDependencies)
+        //{
+        //    var existingDep = distinctDependencies.FirstOrDefault(d => Enumerable.SequenceEqual(d.Dependencies, depGroup.Dependencies));
 
+        //    if (existingDep == null)
+        //    {
+        //        distinctDependencies.Add(depGroup);
+        //    }
+        //}
+
+        //var groupedDependencies =
+        //from dependency in _dal.Dependency.ReadAll()
+        //group dependency by (dependency.DependentTask,dependency.DependsOnTask) into (DependentTask, DependsOnTask)=> newGroup
+        //orderby newGroup.DependentTask
+        //select new { Key = newGroup.Key, List = new List<TaskInList> };
+
+        //var distinctDependencies = groupedDependencies
+        //   .SelectMany(depGroup => depGroup.Dependencies)
+        //   .Where(dep => dep != null)
+        //   .Distinct()
+        //   .ToList();
+        //
+
+        //    var distinctDependencies = groupedDependencies
+        //.SelectMany(depGroup => depGroup.Dependencies.
+        //Select(dep => new { TaskId = depGroup.TaskId, DependencyId = dep }))
+        //.Where(dep => dep.DependencyId != null)
+        //.Distinct()
+        //.ToList();
         int id = 0;
         var mileStone =
-        from dependency in distinctDependencies
-        let task = _dal.Task.Read(dependency.Key)
-        select new BO.Milestone()
+        from dependencies in distinctDependencies
+        select new BO.Task()
         {
             Id = id++,
             Alias = "M" + id,
-            Description = task.Description,
-            CreatedAtDate = task.CreatedAtDate,
+            Description = null,
+            CreatedAtDate = DateTime.Today,
             Status = Status.Scheduled,//נדרש חישוב
-            StartDate = task.StartDate,
-            ForecastDate = null,//נדרש חישוב
-            CompleteDate = task.CompleteDate,
-            DeadlineDate = task.DeadlineDate,
-            CompletionPercentage = 0,
-            Remarks = task.Remarks,
-            Dependencies = (List<TaskInList>)dependency.List
+            Dependencies = (from dep in dependencies.Dependencies
+                           let task = _dal.Task.Read(dep)
+                           select new BO.TaskInList()
+                           {
+                               Id = task.Id,
+                               Description= task.Description,
+                               Alias = task.Alias,
+                               Status = null,
+                           }).ToList(),
 
+        StartDate = null,//נדרש חישוב
+            ForecastDate = null,//נדרש חישוב
+            CompleteDate = null,//נדרש חישוב,
+            DeadlineDate = null,//נדרש חישוב
+            Remarks = null,//נדרש חישוב
+            Milestone = null,//נדרש חישוב
+            RequiredEffortTime= null,//נדרש חישוב
+            Deliverables= null,//נדרש חישוב
+            Engineer= null, 
+            Copmlexity= null,
         };
 
 
