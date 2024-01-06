@@ -15,15 +15,15 @@ internal class MilestoneImplementation : IMilestone
     private DalApi.IDal _dal = DalApi.Factory.Get;
     public List<BO.TaskInList>? Create()
     {//
-    //    var groupedDependencies = _dal.Dependency.ReadAll()
-    //.OrderBy(dep => dep?.DependsOnTask)
-    //.GroupBy(dep => dep?.DependentTask, dep => dep?.DependsOnTask, (id, dependency) => new { TaskId = id, Dependencies = dependency })
-    //.ToList();
+     //    var groupedDependencies = _dal.Dependency.ReadAll()
+     //.OrderBy(dep => dep?.DependsOnTask)
+     //.GroupBy(dep => dep?.DependentTask, dep => dep?.DependsOnTask, (id, dependency) => new { TaskId = id, Dependencies = dependency })
+     //.ToList();
         var groupedDependencies =
         from dependency in _dal.Dependency.ReadAll()
         group dependency by dependency.DependentTask into newGroup
         orderby newGroup.Key
-        select new { Key = newGroup.Key, List = new List<>= };
+        select new { Key = newGroup.Key, List = new List<TaskInList> };
 
         var distinctDependencies = groupedDependencies
            .SelectMany(depGroup => depGroup.List)
