@@ -1,8 +1,6 @@
-﻿
+﻿using BlApi;
 
-using BlApi;
-
-namespace BlAPI;
+namespace BlApi;
 
 public static class Factory
 {

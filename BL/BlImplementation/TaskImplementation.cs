@@ -48,8 +48,8 @@ internal class TaskImplementation : ITask
             Alias = doTask.Alias,
             Description = doTask.Description,
             CreatedAtDate = doTask.CreatedAtDate,
-            Status = ReadStatus(id),
-            Dependencies= ReadDependencies(id),
+            Status = /*ReadStatus(id)*/null,
+            Dependencies= /*ReadDependencies(id)*/ null,
             Milestone =null,//נדרש חישוב
             RequiredEffortTime=doTask.RequiredEffortTime,
             StartDate=doTask.StartDate,
@@ -59,7 +59,7 @@ internal class TaskImplementation : ITask
             CompleteDate=doTask.CompleteDate,
             Deliverables=doTask.Deliverables,
             Remarks=doTask.Remarks,
-            Engineer= ReadEngineerInTask(doTask.EngineerId),
+            Engineer= null/*ReadEngineerInTask(doTask.EngineerId)*/,
             Copmlexity= (BO.EngineerExperience?)doTask.Copmlexity
         };
     }

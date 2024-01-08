@@ -49,7 +49,7 @@ internal class EngineerImplementation : IEngineer
             Email = doEngineer.Email,
             Level = (BO.EngineerExperience)doEngineer.Level,
             Cost = doEngineer.Cost,
-            Task = ReadTaskInEngineer(id),
+            Task = /*ReadTaskInEngineer(id)*/null,
         };
     }
 
@@ -68,7 +68,7 @@ internal class EngineerImplementation : IEngineer
                     Email = doEngineer.Email,
                     Level = (BO.EngineerExperience)doEngineer.Level,
                     Cost = doEngineer.Cost,
-                    Task = ReadTaskInEngineer(doEngineer.Id),
+                    Task =/* ReadTaskInEngineer(doEngineer.Id)*/null,
                 });
     }
 
@@ -93,7 +93,7 @@ internal class EngineerImplementation : IEngineer
 
         return (Tuple<int, string>?)(
             from DO.Task doTask in _dal.Task.ReadAll()
-            where (doTask.Id == id&& doTask.StartDate<=DateTime.Today&& doTask.CompleteDate >= DateTime.Today)
+            where (doTask.Id == id&& doTask.StartDate!=null&& doTask.CompleteDate!=null&&doTask.StartDate<=DateTime.Today&& doTask.CompleteDate >= DateTime.Today)
             select new BO.TaskInEngineer()
             {
                 Id= doTask.Id,
