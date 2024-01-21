@@ -1,6 +1,7 @@
 ﻿namespace BO;
 public enum EngineerExperience
 {
+    All,
     Novice,
     AdvancedBeginner,
     Competent,

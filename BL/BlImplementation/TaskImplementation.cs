@@ -78,7 +78,7 @@ internal class TaskImplementation : ITask
                    Alias = doTask.Alias,
                    Description = doTask.Description,
                    CreatedAtDate = doTask.CreatedAtDate,
-                   Status = ReadStatus(doTask.Id),
+                   Status = /*ReadStatus(doTask.Id)*/null,
                    Dependencies = ReadDependencies(doTask.Id),
                    Milestone = null,//נדרש חישוב
                    RequiredEffortTime = doTask.RequiredEffortTime,
@@ -112,17 +112,29 @@ internal class TaskImplementation : ITask
         }
 
     }
+    //מה שהיה בהתחלה
+    //public Tuple<int, string>? ReadEngineerInTask(int? engineerId)
+    //{
+
+    //    return (Tuple<int, string>?)(
+    //        from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
+    //        where (doEngineer.Id == engineerId)
+    //        select new BO.EngineerInTask()
+    //        {
+    //            Id = doEngineer.Id,
+    //            Name = doEngineer.Name,
+    //        });
+    //}
+
+
     public Tuple<int, string>? ReadEngineerInTask(int? engineerId)
     {
+        var engineer = _dal.Engineer.ReadAll()
+            .Where(doEngineer => doEngineer.Id == engineerId)
+            .Select(doEngineer => Tuple.Create(doEngineer.Id, doEngineer.Name))
+            .FirstOrDefault();
 
-        return (Tuple<int, string>?)(
-            from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
-            where (doEngineer.Id == engineerId)
-            select new BO.EngineerInTask()
-            {
-                Id = doEngineer.Id,
-                Name = doEngineer.Name,
-            });
+        return engineer;
     }
     public List<TaskInList>? ReadDependencies(int taskId)
     {
@@ -138,26 +150,46 @@ internal class TaskImplementation : ITask
                 Status=ReadStatus(doDependency.DependsOnTask),
             }).ToList() ;
     }
+    //public BO.Status ReadStatus(int taskId)
+    //{
+    //    BO.Task? boTask = Read(taskId);
+    //    if (boTask.CompleteDate != null&&boTask.CompleteDate <= DateTime.Today)
+    //    {
+    //        return Status.Done;
+    //    }
+    //    else if (boTask.DeadlineDate != null && (DateTime)boTask.DeadlineDate >= DateTime.Today.AddDays(-7))
+    //    {
+    //        return Status.InJeopardy;
+    //    }
+    //    else if (boTask.StartDate != null&&boTask.StartDate<=DateTime.Today)
+    //    {
+    //        return Status.OnTrack;
+    //    }
+    //    else if (boTask.ScheduledDate != null)
+    //    {
+    //        return Status.Scheduled;
+    //    }
+    //    else { return Status.Unscheduled;}
+    //}
     public BO.Status ReadStatus(int taskId)
     {
         BO.Task? boTask = Read(taskId);
-        if (boTask.CompleteDate != null&&boTask.CompleteDate <= DateTime.Today)
+        if (boTask == null)
         {
-            return Status.Done;
+            // אם לא קיימת משימה עם ה-id
+            return Status.Unscheduled;
         }
-        else if (boTask.DeadlineDate != null && (DateTime)boTask.DeadlineDate >= DateTime.Today.AddDays(-7))
-        {
-            return Status.InJeopardy;
-        }
-        else if (boTask.StartDate != null&&boTask.StartDate<=DateTime.Today)
-        {
-            return Status.OnTrack;
-        }
-        else if (boTask.ScheduledDate != null)
-        {
-            return Status.Scheduled;
-        }
-        else { return Status.Unscheduled;}
-    }
 
+        DateTime today = DateTime.Today;
+
+        return boTask.CompleteDate.HasValue && boTask.CompleteDate.Value <= today
+            ? Status.Done
+            : boTask.DeadlineDate.HasValue && boTask.DeadlineDate.Value >= today.AddDays(-7)
+                ? Status.InJeopardy
+                : boTask.StartDate.HasValue && boTask.StartDate.Value <= today
+                    ? Status.OnTrack
+                    : boTask.ScheduledDate.HasValue
+                        ? Status.Scheduled
+                        : Status.Unscheduled;
+    }
 }

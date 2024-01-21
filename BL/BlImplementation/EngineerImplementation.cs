@@ -60,7 +60,8 @@ internal class EngineerImplementation : IEngineer
 
     public IEnumerable<BO.Engineer?> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
-        return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll((Func<DO.Engineer, bool>?)filter)
+        Func<BO.Engineer, bool> filter1 = filter != null ? filter! : item => true;
+        return (from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
                 select new BO.Engineer()
                 {
                     Id = doEngineer.Id,
@@ -69,8 +70,9 @@ internal class EngineerImplementation : IEngineer
                     Level = (BO.EngineerExperience)doEngineer.Level,
                     Cost = doEngineer.Cost,
                     Task =/* ReadTaskInEngineer(doEngineer.Id)*/null,
-                });
+                }).Where(filter1);
     }
+
 
     public void Update(BO.Engineer boEngineer)
     {

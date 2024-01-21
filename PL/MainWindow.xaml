@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="640" Width="800">
     <Grid>
+        <Button Content="Initialization" HorizontalAlignment="Left" Height="58" Margin="333,105,0,0" VerticalAlignment="Top" Width="124" Click="BtnInitialization_Click"/>
+        <Button Content="Handle Engineers" HorizontalAlignment="Left" Height="67" Margin="333,198,0,0" VerticalAlignment="Top" Width="124" Click="BtnEngineers_Click"/>
 
     </Grid>
 </Window>
