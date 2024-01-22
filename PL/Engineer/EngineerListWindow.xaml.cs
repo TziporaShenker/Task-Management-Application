@@ -20,7 +20,7 @@ namespace PL.Engineer
     public partial class EngineerListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        public BO.EngineerExperience EngineerExperience { get; set; } = BO.EngineerExperience.All;
+        public BO.EngineerExperience EngineerExperience { get; set; } = BO.EngineerExperience.None;
         public EngineerListWindow()
         {
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace PL.Engineer
 
         private void CBEngineerExperience_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            EngineerList = (EngineerExperience == BO.EngineerExperience.All) ?
+            EngineerList = (EngineerExperience == BO.EngineerExperience.None) ?
                 s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == EngineerExperience)!;
         }
 
