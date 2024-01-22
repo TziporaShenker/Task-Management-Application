@@ -23,4 +23,9 @@ public class Task
     public string? Remarks { get; set; } 
     public Tuple<int, string>? Engineer { get; set; }
     public EngineerExperience? Copmlexity { get; set; }
+
+    public override string ToString()
+    {
+        return Tools.GenericToString(this);
+    }
 }

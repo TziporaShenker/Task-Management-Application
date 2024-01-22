@@ -8,4 +8,9 @@ public class Engineer
     public EngineerExperience Level { get; set; }
     public double Cost { get; set; }
     public Tuple<int, string>? Task { get; set; }
+
+    public override string ToString()
+    {
+        return Tools.GenericToString(this);
+    }
 }
