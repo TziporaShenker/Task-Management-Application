@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PL.Engineer
 {
@@ -23,6 +14,11 @@ namespace PL.Engineer
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.EngineerExperience EngineerExperience { get; set; } = BO.EngineerExperience.Novice;
 
+        public BO.Engineer Engineer
+        {
+            get { return (BO.Engineer)GetValue(EngineerProperty); }
+            set { SetValue(EngineerProperty, value); }
+        }
 
         public EngineerWindow(int Id = 0)
         {
@@ -30,6 +26,7 @@ namespace PL.Engineer
             if (Id == 0)
             {
                 Engineer = new BO.Engineer();
+                 
             }
             else
             {
@@ -46,14 +43,23 @@ namespace PL.Engineer
             }
           
         }
-        public BO.Engineer Engineer
-        {
-            get { return (BO.Engineer)GetValue(EngineerProperty); }
-            set { SetValue(EngineerProperty, value); }
-        }
+       
 
         public static readonly DependencyProperty EngineerProperty =
-            DependencyProperty.Register("Engineer", typeof(IEnumerable<BO.Engineer>), typeof(EngineerWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
+        private void BtnSaveEngineer_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = (Button)sender;
+            object contentValue = clickedButton.Content;
+            if (contentValue == "Add") {
+                s_bl.Engineer.Create(Engineer);
+            }
+            else
+            {
+                s_bl.Engineer.Update(Engineer);
+            }
+            this.Close();
+        }
     }
 }

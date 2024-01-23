@@ -39,18 +39,17 @@ internal class EngineerImplementation : IEngineer
     {
 
         DO.Engineer? doEngineer = _dal.Engineer.Read(id);
-        if (doEngineer == null)
-            throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist");
-
-        return new BO.Engineer()
-        {
-            Id = id,
-            Name = doEngineer.Name,
-            Email = doEngineer.Email,
-            Level = (BO.EngineerExperience)doEngineer.Level,
-            Cost = doEngineer.Cost,
-            Task = /*ReadTaskInEngineer(id)*/null,
-        };
+        return doEngineer == null
+            ? throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist")
+            : new BO.Engineer()
+            {
+                Id = id,
+                Name = doEngineer.Name,
+                Email = doEngineer.Email,
+                Level = (BO.EngineerExperience)doEngineer.Level,
+                Cost = doEngineer.Cost,
+                Task = null,
+            };
     }
 
     public BO.Engineer? Read(Func<BO.Engineer, bool> filter)
