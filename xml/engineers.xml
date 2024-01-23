@@ -35,9 +35,4 @@
     <Level>Proficient</Level>
     <Cost>500</Cost>
   </Engineer>
-  <Engineer>
-    <Id>0</Id>
-    <Level>Novice</Level>
-    <Cost>0</Cost>
-  </Engineer>
 </ArrayOfEngineer>
