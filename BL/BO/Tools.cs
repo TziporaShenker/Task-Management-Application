@@ -4,16 +4,47 @@ using System.Reflection;
 namespace BO;
 
 internal static class Tools
-{
-    // פונקציה שמחזירה מחרוזת המייצגת את התכולת האובייקט
+{ 
     public static string GenericToString(this object p)
     {
         var prop = p.GetType().GetProperties();
         string str = "";
         foreach (var property in prop)
         {
-            str +=" "+ property.Name + ":" + property.GetValue(p);
+            if (property.Name == "Dependencies")
+            {
+                var dependenciesValue = property.GetValue(p);
+                if (dependenciesValue != null)
+                {
+                    var dependenciesList = (System.Collections.IEnumerable)dependenciesValue;
+                    str += $"{property.Name}: [";
+
+                    foreach (var taskInList in dependenciesList)
+                    {
+                        var taskProperties = taskInList.GetType().GetProperties();
+                        str += "{ ";
+
+                        foreach (var taskProperty in taskProperties)
+                        {
+                            str += $"{taskProperty.Name}: {taskProperty.GetValue(taskInList)}, ";
+                        }
+
+                        str = str.TrimEnd(',', ' ') + " }, ";
+                    }
+
+                    str = str.TrimEnd(',', ' ') + "]";
+                }
+            }
+            else
+            {
+                str += $" {property.Name}: {property.GetValue(p)},";
+            }
         }
-        return str;
+
+        return str.TrimEnd(',', ' ');
     }
+
 }
+
+
+

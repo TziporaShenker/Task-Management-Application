@@ -48,8 +48,8 @@ internal class TaskImplementation : ITask
             Alias = doTask.Alias,
             Description = doTask.Description,
             CreatedAtDate = doTask.CreatedAtDate,
-            Status = /*ReadStatus(id)*/null,
-            Dependencies= /*ReadDependencies(id)*/ null,
+            Status = ReadStatus(id),
+            Dependencies = ReadDependencies(id),
             Milestone =null,//נדרש חישוב
             RequiredEffortTime=doTask.RequiredEffortTime,
             StartDate=doTask.StartDate,
@@ -59,7 +59,7 @@ internal class TaskImplementation : ITask
             CompleteDate=doTask.CompleteDate,
             Deliverables=doTask.Deliverables,
             Remarks=doTask.Remarks,
-            Engineer= null/*ReadEngineerInTask(doTask.EngineerId)*/,
+            Engineer= ReadEngineerInTask(doTask.EngineerId),
             Copmlexity= (BO.EngineerExperience?)doTask.Copmlexity
         };
     }
@@ -78,7 +78,7 @@ internal class TaskImplementation : ITask
                    Alias = doTask.Alias,
                    Description = doTask.Description,
                    CreatedAtDate = doTask.CreatedAtDate,
-                   Status = /*ReadStatus(doTask.Id)*/null,
+                   Status = ReadStatus(doTask.Id),
                    Dependencies = ReadDependencies(doTask.Id),
                    Milestone = null,//נדרש חישוב
                    RequiredEffortTime = doTask.RequiredEffortTime,
@@ -112,31 +112,17 @@ internal class TaskImplementation : ITask
         }
 
     }
-    //מה שהיה בהתחלה
-    //public Tuple<int, string>? ReadEngineerInTask(int? engineerId)
-    //{
-
-    //    return (Tuple<int, string>?)(
-    //        from DO.Engineer doEngineer in _dal.Engineer.ReadAll()
-    //        where (doEngineer.Id == engineerId)
-    //        select new BO.EngineerInTask()
-    //        {
-    //            Id = doEngineer.Id,
-    //            Name = doEngineer.Name,
-    //        });
-    //}
-
-
+   
     public Tuple<int, string>? ReadEngineerInTask(int? engineerId)
     {
         var engineer = _dal.Engineer.ReadAll()
-            .Where(doEngineer => doEngineer.Id == engineerId)
-            .Select(doEngineer => Tuple.Create(doEngineer.Id, doEngineer.Name))
+            .Where(doEngineer => doEngineer!.Id == engineerId)
+            .Select(doEngineer => Tuple.Create(doEngineer!.Id, doEngineer!.Name))
             .FirstOrDefault();
 
         return engineer;
     }
-    public List<TaskInList>? ReadDependencies(int taskId)
+       public List<TaskInList>? ReadDependencies(int taskId)
     {
         return (
             from DO.Dependency doDependency in _dal.Dependency.ReadAll()
@@ -146,49 +132,23 @@ internal class TaskImplementation : ITask
             {
                 Id = doDependency.DependsOnTask,
                 Description = dependentTask.Description,
-                Alias= dependentTask.Alias,
-                Status=ReadStatus(doDependency.DependsOnTask),
-            }).ToList() ;
+                Alias = dependentTask.Alias,
+                Status = ReadStatus(doDependency.DependsOnTask),
+            }).ToList();
     }
-    //public BO.Status ReadStatus(int taskId)
-    //{
-    //    BO.Task? boTask = Read(taskId);
-    //    if (boTask.CompleteDate != null&&boTask.CompleteDate <= DateTime.Today)
-    //    {
-    //        return Status.Done;
-    //    }
-    //    else if (boTask.DeadlineDate != null && (DateTime)boTask.DeadlineDate >= DateTime.Today.AddDays(-7))
-    //    {
-    //        return Status.InJeopardy;
-    //    }
-    //    else if (boTask.StartDate != null&&boTask.StartDate<=DateTime.Today)
-    //    {
-    //        return Status.OnTrack;
-    //    }
-    //    else if (boTask.ScheduledDate != null)
-    //    {
-    //        return Status.Scheduled;
-    //    }
-    //    else { return Status.Unscheduled;}
-    //}
     public BO.Status ReadStatus(int taskId)
     {
-        BO.Task? boTask = Read(taskId);
-        if (boTask == null)
-        {
-            // אם לא קיימת משימה עם ה-id
-            return Status.Unscheduled;
-        }
+        DO.Task? doTask = _dal.Task.Read(taskId);
 
         DateTime today = DateTime.Today;
 
-        return boTask.CompleteDate.HasValue && boTask.CompleteDate.Value <= today
+        return doTask.CompleteDate.HasValue && doTask.CompleteDate.Value <= today
             ? Status.Done
-            : boTask.DeadlineDate.HasValue && boTask.DeadlineDate.Value >= today.AddDays(-7)
+            : doTask.DeadlineDate.HasValue && doTask.DeadlineDate.Value >= today.AddDays(-7)
                 ? Status.InJeopardy
-                : boTask.StartDate.HasValue && boTask.StartDate.Value <= today
+                : doTask.StartDate.HasValue && doTask.StartDate.Value <= today
                     ? Status.OnTrack
-                    : boTask.ScheduledDate.HasValue
+                    : doTask.ScheduledDate.HasValue
                         ? Status.Scheduled
                         : Status.Unscheduled;
     }
