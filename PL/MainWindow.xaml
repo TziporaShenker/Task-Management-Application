@@ -9,6 +9,7 @@
     <Grid>
         <Button Content="Initialization" HorizontalAlignment="Left" Height="58" Margin="333,105,0,0" VerticalAlignment="Top" Width="124" Click="BtnInitialization_Click"/>
         <Button Content="Handle Engineers" HorizontalAlignment="Left" Height="67" Margin="333,198,0,0" VerticalAlignment="Top" Width="124" Click="BtnEngineers_Click"/>
+        <Button Content="Handle Tasks" HorizontalAlignment="Left" Height="67" Margin="333,301,0,0" VerticalAlignment="Top" Width="124" Click="BtnTasks_Click"/>
 
     </Grid>
 </Window>

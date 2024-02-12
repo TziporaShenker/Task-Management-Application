@@ -11,7 +11,7 @@ internal class TaskImplementation : ITask
     public int Create(BO.Task boTask)
     {
         DO.Task doTask = new DO.Task
-                       (boTask.Id, boTask.Alias, boTask.Description, boTask.CreatedAtDate, boTask.RequiredEffortTime,false, boTask.StartDate, boTask.ScheduledDate, boTask.DeadlineDate, boTask.CompleteDate, boTask.Deliverables, boTask.Remarks,null, (DO.EngineerExperience?)boTask.Copmlexity);
+                       (boTask.Id, boTask.Alias, boTask.Description, boTask.CreatedAtDate, boTask.RequiredEffortTime, false, boTask.StartDate, boTask.ScheduledDate, boTask.DeadlineDate, boTask.CompleteDate, boTask.Deliverables, boTask.Remarks, null, (DO.EngineerExperience?)boTask.Copmlexity);
         try
         {
             int idTask = _dal.Task.Create(doTask);
@@ -50,17 +50,17 @@ internal class TaskImplementation : ITask
             CreatedAtDate = doTask.CreatedAtDate,
             Status = ReadStatus(id),
             Dependencies = ReadDependencies(id),
-            Milestone =null,//נדרש חישוב
-            RequiredEffortTime=doTask.RequiredEffortTime,
-            StartDate=doTask.StartDate,
-            ScheduledDate=doTask.ScheduledDate,
-            ForecastDate= doTask.StartDate+ doTask.RequiredEffortTime,
-            DeadlineDate=doTask.DeadlineDate,
-            CompleteDate=doTask.CompleteDate,
-            Deliverables=doTask.Deliverables,
-            Remarks=doTask.Remarks,
-            Engineer= ReadEngineerInTask(doTask.EngineerId),
-            Copmlexity= (BO.EngineerExperience?)doTask.Copmlexity
+            Milestone = null,//נדרש חישוב
+            RequiredEffortTime = doTask.RequiredEffortTime,
+            StartDate = doTask.StartDate,
+            ScheduledDate = doTask.ScheduledDate,
+            ForecastDate = doTask.StartDate + doTask.RequiredEffortTime,
+            DeadlineDate = doTask.DeadlineDate,
+            CompleteDate = doTask.CompleteDate,
+            Deliverables = doTask.Deliverables,
+            Remarks = doTask.Remarks,
+            Engineer = ReadEngineerInTask(doTask.EngineerId),
+            Copmlexity = (BO.EngineerExperience?)doTask.Copmlexity
         };
     }
 
@@ -108,11 +108,11 @@ internal class TaskImplementation : ITask
         catch (Exception ex)
         {
 
-            throw new BO.BlDoesNotExistException(ex.Message ,ex);
+            throw new BO.BlDoesNotExistException(ex.Message, ex);
         }
 
     }
-   
+
     public Tuple<int, string>? ReadEngineerInTask(int? engineerId)
     {
         var engineer = _dal.Engineer.ReadAll()
@@ -122,12 +122,13 @@ internal class TaskImplementation : ITask
 
         return engineer;
     }
-       public List<TaskInList>? ReadDependencies(int taskId)
+    public List<TaskInList>? ReadDependencies(int taskId)
     {
+        
         return (
             from DO.Dependency doDependency in _dal.Dependency.ReadAll()
             where (doDependency.DependentTask == taskId)
-            let dependentTask = Read(doDependency.DependsOnTask)
+            let dependentTask = _dal.Task.Read(doDependency.DependsOnTask)
             select new BO.TaskInList()
             {
                 Id = doDependency.DependsOnTask,

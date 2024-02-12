@@ -1,7 +1,4 @@
-﻿using BlApi;
-using BO;
-using DalApi;
-using DalTest;
+﻿using BO;
 
 namespace BlTest
 {
@@ -174,8 +171,8 @@ namespace BlTest
                         int taskEngineerId = int.Parse(Console.ReadLine());
 
                         Console.Write("Task's Level (0 for Easy, 1 for Moderate, 2 for Complex): ");
-                        int taskComplexityLevel = int.Parse(Console.ReadLine());
-                        BO.EngineerExperience taskComplexity = (BO.EngineerExperience)taskComplexityLevel;
+                        int taskCopmlexityLevel = int.Parse(Console.ReadLine());
+                        BO.EngineerExperience taskCopmlexity = (BO.EngineerExperience)taskCopmlexityLevel;
                         Console.Write("Current Task Number: ");
 
                         BO.Task newTask = new BO.Task()
@@ -196,7 +193,7 @@ namespace BlTest
                             Deliverables = null,
                             Remarks = taskRemarks,
                             Engineer = null,
-                            Copmlexity = taskComplexity
+                            Copmlexity = taskCopmlexity
                         };
                         s_bl.Task.Create(newTask);
                         break;

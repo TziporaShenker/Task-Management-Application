@@ -15,6 +15,7 @@ namespace PL.Engineer
         {
             InitializeComponent();
             EngineerList = s_bl?.Engineer.ReadAll()!;
+            
         }
 
         public IEnumerable<BO.Engineer> EngineerList
@@ -35,6 +36,7 @@ namespace PL.Engineer
         private void BtnAddEngineer_Click(object sender, RoutedEventArgs e)
         {
             new EngineerWindow().ShowDialog();
+
 
         }
         private void updateEngineer_click(object sender, RoutedEventArgs e)

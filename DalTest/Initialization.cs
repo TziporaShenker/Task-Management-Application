@@ -179,13 +179,13 @@ public static class Initialization
 
         int[] dependecies40 = new int[40];
         var randomOrderedTasks = from dependency in dependecies40
-                                 select s_rand.Next(0, tasksList.Count());
+                                 select s_rand.Next(1, tasksList.Count());
         var dependecies =
             randomOrderedTasks
             .Select(_dependentTask =>
             {
                 do
-                    x = s_rand.Next(0, tasksList.Count());
+                    x = s_rand.Next(1, tasksList.Count());
                 while (tasksList.ElementAt(_dependentTask).Id == x);
                 _dependsOnTask = tasksList.ElementAt(x).Id;
                 return new Dependency(0, _dependentTask, _dependsOnTask);
