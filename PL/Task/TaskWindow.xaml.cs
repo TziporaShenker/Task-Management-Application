@@ -11,6 +11,8 @@ namespace PL.Task
     public partial class TaskWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
+        public BO.Status Status { get; set; } = BO.Status.Unscheduled;
+
 
         public BO.Task Task
         {
@@ -41,7 +43,7 @@ namespace PL.Task
         }
 
         public static readonly DependencyProperty TaskProperty =
-            DependencyProperty.Register("Engineer", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("Task", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null));
 
         private void BtnSaveTask_Click(object sender, RoutedEventArgs e)
         {
@@ -56,11 +58,6 @@ namespace PL.Task
                 s_bl.Task.Update(Task);
             }
             this.Close();
-
-        }
-
-        private void BtnSaveEngineer_Click(object sender, RoutedEventArgs e)
-        {
 
         }
 

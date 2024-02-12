@@ -12,7 +12,7 @@ namespace PL.Task
     public partial class TaskListWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-        //public BO.EngineerExperience EngineerExperience { get; set; } = BO.EngineerExperience.None;
+        public BO.EngineerExperience EngineerExperience { get; set; } = BO.EngineerExperience.None;
         public TaskListWindow()
         {
             InitializeComponent();
@@ -40,7 +40,9 @@ namespace PL.Task
 
         }
 
-        private void updateTask_click(object sender, RoutedEventArgs e)
+       
+
+        private void UpdateTask_click(object sender, RoutedEventArgs e)
         {
             BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
             new TaskWindow(task.Id).ShowDialog();

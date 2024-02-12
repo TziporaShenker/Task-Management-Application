@@ -29,7 +29,7 @@
             <!-- ComboBox נוסף לתוך העמודה השנייה של הגריד הפנימי העליון -->
             <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"  SelectedValue="{Binding Path=EngineerExperience, Mode=TwoWay}" SelectionChanged="CBEngineerExperience_SelectionChanged"/>
         </Grid>
-        <ListView Grid.Row="1" ItemsSource="{Binding EngineerList}" Margin="5" MouseDoubleClick="updateEngineer_click" >
+        <ListView Grid.Row="1" ItemsSource="{Binding EngineerList}" Margin="5" MouseDoubleClick="UpdateEngineer_click" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
