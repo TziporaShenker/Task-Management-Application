@@ -99,8 +99,7 @@ internal class TaskImplementation : ITask
         if (Read(boTask.Id) is null)
             throw new BO.BlDoesNotExistException($"Task with ID={boTask.Id} does Not exist");
 
-        DO.Task doTask = new DO.Task
-                (boTask.Id, boTask.Alias, boTask.Description, boTask.CreatedAtDate, boTask.RequiredEffortTime, false, boTask.StartDate, boTask.ScheduledDate, boTask.DeadlineDate, boTask.CompleteDate, boTask.Deliverables, boTask.Remarks, null, (DO.EngineerExperience?)boTask.Copmlexity);
+        DO.Task doTask = new (boTask.Id, boTask.Alias, boTask.Description, boTask.CreatedAtDate, boTask.RequiredEffortTime, false, boTask.StartDate, boTask.ScheduledDate, boTask.DeadlineDate, boTask.CompleteDate, boTask.Deliverables, boTask.Remarks, null, (DO.EngineerExperience?)boTask.Copmlexity);
         try
         {
             _dal.Task.Update(doTask);

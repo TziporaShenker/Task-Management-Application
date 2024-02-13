@@ -60,11 +60,11 @@ namespace PL.Engineer
                 MessageBox.Show("Please enter a valid email address.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            //if (comboBox.SelectedIndex == 0)
-            //{
-            //    MessageBox.Show("Please select a task.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            //    return;
-            //}
+            if (Engineer.Level == 0)
+            {
+                MessageBox.Show("Please select a task.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             Button clickedButton = (Button)sender;
             object contentValue = clickedButton.Content;
             if (contentValue == "Add")

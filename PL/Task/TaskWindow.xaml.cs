@@ -23,7 +23,6 @@ namespace PL.Task
         public TaskWindow(int Id = 0)
         {
             InitializeComponent();
-            EngineerList = s_bl.Engineer.ReadAll()!.Select(engineer => engineer.Id).ToList();
             if (Id == 0)
             {
                 Task = new BO.Task();
@@ -63,14 +62,7 @@ namespace PL.Task
 
         }
 
-        public List<int> EngineerList
-        {
-            get { return (List<int>)GetValue(EngineerListProperty); }
-            set { SetValue(EngineerListProperty, value); }
-        }
-        public static readonly DependencyProperty EngineerListProperty =
-          DependencyProperty.Register("EngineerList", typeof(List<int>), typeof(EngineerListWindow), new PropertyMetadata(null));
-
+        
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
