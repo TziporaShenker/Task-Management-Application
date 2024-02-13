@@ -4,7 +4,7 @@
     <Id>1</Id>
     <Alias>Designing</Alias>
     <Description>Designing and developing new products or systems.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8509191+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.6637649+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -20,7 +20,23 @@
     <Id>2</Id>
     <Alias>Conducting</Alias>
     <Description>Conducting research and analysis to solve engineering problems.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8674228+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.6905983+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables />
+    <Remarks />
+    <EngineerId xsi:nil="true" />
+    <Copmlexity>Competent</Copmlexity>
+  </Task>
+  <Task>
+    <Id>3</Id>
+    <Alias>Creating</Alias>
+    <Description>Creating and interpreting technical drawings and specifications.</Description>
+    <CreatedAtDate>2024-01-15T00:12:14.6910684+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -33,26 +49,10 @@
     <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
-    <Id>3</Id>
-    <Alias>Creating</Alias>
-    <Description>Creating and interpreting technical drawings and specifications.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8677379+02:00</CreatedAtDate>
-    <RequiredEffortTime xsi:nil="true" />
-    <IsMilestone>false</IsMilestone>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables />
-    <Remarks />
-    <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
-  </Task>
-  <Task>
     <Id>4</Id>
     <Alias>Testing</Alias>
     <Description>Testing and evaluating prototypes and systems for performance and safety.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8678931+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.7016997+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -62,13 +62,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Proficient</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
     <Id>5</Id>
     <Alias>Collaborating</Alias>
     <Description>Collaborating with cross - functional teams to identify and address design issues.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.868067+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.7022715+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -84,7 +84,7 @@
     <Id>6</Id>
     <Alias>Developing</Alias>
     <Description>Developing and implementing engineering solutions to optimize manufacturing processes.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8682283+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.7024322+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -94,13 +94,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Proficient</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
   </Task>
   <Task>
     <Id>7</Id>
     <Alias>Conducting</Alias>
     <Description>Conducting feasibility studies to assess the viability of engineering projects.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8683503+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.7025545+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -110,13 +110,13 @@
     <Deliverables />
     <Remarks />
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Competent</Copmlexity>
+    <Copmlexity>Novice</Copmlexity>
   </Task>
   <Task>
     <Id>8</Id>
     <Alias>Providing</Alias>
     <Description>Providing technical support and guidance to colleagues and clients.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8685223+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.7026716+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -132,7 +132,7 @@
     <Id>9</Id>
     <Alias>Managing</Alias>
     <Description>Managing and overseeing engineering projects from start to finish.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8686561+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.7027925+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -142,61 +142,45 @@
     <Deliverables />
     <Remarks />
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Novice</Copmlexity>
+    <Copmlexity>AdvancedBeginner</Copmlexity>
+  </Task>
+  <Task>
+    <Id>10</Id>
+    <Alias>Ensuring</Alias>
+    <Description>Ensuring compliance with industry standards and regulations.</Description>
+    <CreatedAtDate>2024-01-15T00:12:14.7029191+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables />
+    <Remarks />
+    <EngineerId xsi:nil="true" />
+    <Copmlexity>Competent</Copmlexity>
+  </Task>
+  <Task>
+    <Id>11</Id>
+    <Alias>Conducting</Alias>
+    <Description>Conducting risk assessments and implementing appropriate safety measures.</Description>
+    <CreatedAtDate>2024-01-15T00:12:14.7030562+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables />
+    <Remarks />
+    <EngineerId xsi:nil="true" />
+    <Copmlexity>Competent</Copmlexity>
   </Task>
   <Task>
     <Id>12</Id>
     <Alias>Troubleshooting</Alias>
     <Description>Troubleshooting and resolving technical issues and malfunctions.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8691684+02:00</CreatedAtDate>
-    <RequiredEffortTime xsi:nil="true" />
-    <IsMilestone>false</IsMilestone>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables />
-    <Remarks />
-    <EngineerId xsi:nil="true" />
-    <Copmlexity>Novice</Copmlexity>
-  </Task>
-  <Task>
-    <Id>13</Id>
-    <Alias>Conducting</Alias>
-    <Description>Conducting quality control and assurance checks on products and systems.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8692874+02:00</CreatedAtDate>
-    <RequiredEffortTime xsi:nil="true" />
-    <IsMilestone>false</IsMilestone>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables />
-    <Remarks />
-    <EngineerId xsi:nil="true" />
-    <Copmlexity>Proficient</Copmlexity>
-  </Task>
-  <Task>
-    <Id>14</Id>
-    <Alias>Developing</Alias>
-    <Description>Developing and implementing preventive maintenance strategies.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8694454+02:00</CreatedAtDate>
-    <RequiredEffortTime xsi:nil="true" />
-    <IsMilestone>false</IsMilestone>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables />
-    <Remarks />
-    <EngineerId xsi:nil="true" />
-    <Copmlexity>Proficient</Copmlexity>
-  </Task>
-  <Task>
-    <Id>15</Id>
-    <Alias>Keeping</Alias>
-    <Description>Keeping up - to - date with industry trends and advancements in engineering technology.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8695678+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.7031701+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -209,10 +193,10 @@
     <Copmlexity>Expert</Copmlexity>
   </Task>
   <Task>
-    <Id>16</Id>
-    <Alias>Collaborating</Alias>
-    <Description>Collaborating with suppliers and vendors to source and procure materials and equipment.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8696824+02:00</CreatedAtDate>
+    <Id>13</Id>
+    <Alias>Conducting</Alias>
+    <Description>Conducting quality control and assurance checks on products and systems.</Description>
+    <CreatedAtDate>2024-01-15T00:12:14.7032839+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -225,10 +209,58 @@
     <Copmlexity>Novice</Copmlexity>
   </Task>
   <Task>
+    <Id>14</Id>
+    <Alias>Developing</Alias>
+    <Description>Developing and implementing preventive maintenance strategies.</Description>
+    <CreatedAtDate>2024-01-15T00:12:14.7033958+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables />
+    <Remarks />
+    <EngineerId xsi:nil="true" />
+    <Copmlexity>Expert</Copmlexity>
+  </Task>
+  <Task>
+    <Id>15</Id>
+    <Alias>Keeping</Alias>
+    <Description>Keeping up - to - date with industry trends and advancements in engineering technology.</Description>
+    <CreatedAtDate>2024-01-15T00:12:14.7035079+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables />
+    <Remarks />
+    <EngineerId xsi:nil="true" />
+    <Copmlexity>AdvancedBeginner</Copmlexity>
+  </Task>
+  <Task>
+    <Id>16</Id>
+    <Alias>Collaborating</Alias>
+    <Description>Collaborating with suppliers and vendors to source and procure materials and equipment.</Description>
+    <CreatedAtDate>2024-01-15T00:12:14.7036207+02:00</CreatedAtDate>
+    <RequiredEffortTime xsi:nil="true" />
+    <IsMilestone>false</IsMilestone>
+    <StartDate xsi:nil="true" />
+    <ScheduledDate xsi:nil="true" />
+    <DeadlineDate xsi:nil="true" />
+    <CompleteDate xsi:nil="true" />
+    <Deliverables />
+    <Remarks />
+    <EngineerId xsi:nil="true" />
+    <Copmlexity>Proficient</Copmlexity>
+  </Task>
+  <Task>
     <Id>17</Id>
     <Alias>Training</Alias>
     <Description>Training and mentoring junior engineers and technicians.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8698029+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.7037325+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -244,23 +276,7 @@
     <Id>18</Id>
     <Alias>Conducting</Alias>
     <Description>Conducting cost analysis and budgeting for engineering projects.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8699176+02:00</CreatedAtDate>
-    <RequiredEffortTime xsi:nil="true" />
-    <IsMilestone>false</IsMilestone>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables />
-    <Remarks />
-    <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
-  </Task>
-  <Task>
-    <Id>19</Id>
-    <Alias>Participating</Alias>
-    <Description>Participating in continuous improvement initiatives to enhance efficiency and productivity.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8700328+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.7038444+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -273,10 +289,10 @@
     <Copmlexity>Novice</Copmlexity>
   </Task>
   <Task>
-    <Id>10</Id>
-    <Alias>Ensuring</Alias>
-    <Description>Ensuring compliance with industry standards and regulations.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8688316+02:00</CreatedAtDate>
+    <Id>19</Id>
+    <Alias>Participating</Alias>
+    <Description>Participating in continuous improvement initiatives to enhance efficiency and productivity.</Description>
+    <CreatedAtDate>2024-01-15T00:12:14.7039594+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
@@ -286,70 +302,20 @@
     <Deliverables />
     <Remarks />
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Proficient</Copmlexity>
-  </Task>
-  <Task>
-    <Id>11</Id>
-    <Alias>Conducting</Alias>
-    <Description>Conducting risk assessments and implementing appropriate safety measures.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8690475+02:00</CreatedAtDate>
-    <RequiredEffortTime xsi:nil="true" />
-    <IsMilestone>false</IsMilestone>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables />
-    <Remarks />
-    <EngineerId xsi:nil="true" />
-    <Copmlexity>AdvancedBeginner</Copmlexity>
-  </Task>
-  <Task>
-    <Id>21</Id>
-    <Alias>ג</Alias>
-    <Description />
-    <CreatedAtDate>0001-01-01T00:00:00</CreatedAtDate>
-    <RequiredEffortTime xsi:nil="true" />
-    <IsMilestone>false</IsMilestone>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables />
-    <Remarks />
-    <EngineerId xsi:nil="true" />
-    <Copmlexity xsi:nil="true" />
-  </Task>
-  <Task>
-    <Id>22</Id>
-    <Alias>tt</Alias>
-    <Description />
-    <CreatedAtDate>0001-01-01T00:00:00</CreatedAtDate>
-    <RequiredEffortTime xsi:nil="true" />
-    <IsMilestone>false</IsMilestone>
-    <StartDate xsi:nil="true" />
-    <ScheduledDate xsi:nil="true" />
-    <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <Deliverables />
-    <Remarks />
-    <EngineerId xsi:nil="true" />
-    <Copmlexity xsi:nil="true" />
+    <Copmlexity>Novice</Copmlexity>
   </Task>
   <Task>
     <Id>20</Id>
-    <Alias>y</Alias>
+    <Alias>Documenting</Alias>
     <Description>Documenting and communicating engineering processes and outcomes effectively.</Description>
-    <CreatedAtDate>2024-01-14T22:39:27.8701497+02:00</CreatedAtDate>
+    <CreatedAtDate>2024-01-15T00:12:14.7040861+02:00</CreatedAtDate>
     <RequiredEffortTime xsi:nil="true" />
     <IsMilestone>false</IsMilestone>
     <StartDate xsi:nil="true" />
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
     <CompleteDate xsi:nil="true" />
-    <Deliverables />
-    <Remarks />
     <EngineerId xsi:nil="true" />
-    <Copmlexity>Expert</Copmlexity>
+    <Copmlexity>Novice</Copmlexity>
   </Task>
 </ArrayOfTask>

@@ -36,25 +36,6 @@ public static class Initialization
         "Ariela Levin", "Dina Klein"
         };
 
-        //foreach (var _name in engineerNames)
-        //{
-        //    int _id;
-        //    string _email;
-        //    EngineerExperience _level;
-        //    double _cost;
-        //    do
-        //        _id = s_rand.Next(MIN_ID, MAX_ID);
-        //    while (s_dal.Engineer!.Read(_id) != null);
-
-        //    int x = s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
-        //    _level  = (EngineerExperience)x;
-        //    _cost = s_rand.Next(200, 500);
-        //    _email = _name + "@gmail.com" ;
-
-        //    Engineer newEng = new(_id, _name, _email, _level, _cost);
-
-        //    s_dal.Engineer!.Create(newEng);
-        //}
         var engineers =
             engineerNames.Select(_name =>
         {
@@ -70,7 +51,7 @@ public static class Initialization
             int x = s_rand.Next(0, Enum.GetNames<EngineerExperience>().Length);
             _level = (EngineerExperience)x;
             _cost = s_rand.Next(200, 500);
-            _email = _name + "@gmail.com";
+            _email = _name.Substring(0, _name.IndexOf(' ')) + "@gmail.com";
 
             return new Engineer(_id, _name, _email, _level, _cost);
         });
