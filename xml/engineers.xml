@@ -36,13 +36,6 @@
     <Cost>121233</Cost>
   </Engineer>
   <Engineer>
-    <Id>385142398</Id>
-    <Name>Dina Klein 12345</Name>
-    <Email>DinaKlein@gmail.com</Email>
-    <Level>AdvancedBeginner</Level>
-    <Cost>214</Cost>
-  </Engineer>
-  <Engineer>
     <Id>52147895</Id>
     <Name>aaa</Name>
     <Email>aaa@aaah</Email>
@@ -55,5 +48,12 @@
     <Email>dff@fgf</Email>
     <Level>Competent</Level>
     <Cost>4566</Cost>
+  </Engineer>
+  <Engineer>
+    <Id>385142398</Id>
+    <Name>Dina Klein 12345</Name>
+    <Email>DinaKlein@gmail.com</Email>
+    <Level>AdvancedBeginner</Level>
+    <Cost>2140</Cost>
   </Engineer>
 </ArrayOfEngineer>

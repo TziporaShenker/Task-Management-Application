@@ -19,7 +19,7 @@ namespace PL.Engineer
             EngineerList = temp;
         }
 
-        // עדכון רשימת המשימות לאחר סגירת חלון משימה
+        // עדכון רשימת המשימות לאחר סגירת חלון מהנדס
         private void UpdateListAfterEnginnerWindowClosed()
         {
             var temp = s_bl?.Engineer.ReadAll();
@@ -48,7 +48,7 @@ namespace PL.Engineer
             {
                 var engineerWindow = new EngineerWindow();
                 engineerWindow.Closed += (sender, e) => UpdateListAfterEnginnerWindowClosed();
-                engineerWindow.Show();
+                engineerWindow.ShowDialog();
             }
             catch (Exception ex)
             {

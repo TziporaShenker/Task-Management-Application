@@ -1,4 +1,6 @@
 ﻿
+using PL.Engineer;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,9 +18,15 @@ namespace PL.Task
         public TaskListWindow()
         {
             InitializeComponent();
-            TaskList = s_bl?.Task.ReadAll()!;
+            var temp  = s_bl?.Task.ReadAll()!;
+            TaskList= temp;
         }
-
+        // עדכון רשימת המשימות לאחר סגירת חלון משימה
+        private void UpdateListAfterTaskWindowClosed()
+        {
+            var temp = s_bl?.Task.ReadAll();
+            TaskList = temp;
+        }
         public IEnumerable<BO.Task> TaskList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
@@ -36,14 +44,25 @@ namespace PL.Task
 
         private void BtnAddTask_Click(object sender, RoutedEventArgs e)
         {
-            new TaskWindow().ShowDialog();
+            try
+            {
+               var taskWindow=new TaskWindow();
+                taskWindow.Closed += (sender, e) => UpdateListAfterTaskWindowClosed();
+                taskWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex}", "Confirmation", MessageBoxButton.OK);
+            }
 
         }
 
         private void UpdateTask_click(object sender, RoutedEventArgs e)
         {
             BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;
-            new TaskWindow(task.Id).ShowDialog();
+            var taskWindow = new TaskWindow(task.Id);
+            taskWindow.Closed += (s, args) => UpdateListAfterTaskWindowClosed();
+            taskWindow.ShowDialog();
         }
     }
 }
