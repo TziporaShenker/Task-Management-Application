@@ -62,7 +62,7 @@ namespace PL.Engineer
             }
             if (Engineer.Level == 0)
             {
-                MessageBox.Show("Please select a task.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please select a level.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             Button clickedButton = (Button)sender;
