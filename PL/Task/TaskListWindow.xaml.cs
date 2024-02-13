@@ -40,8 +40,6 @@ namespace PL.Task
 
         }
 
-       
-
         private void UpdateTask_click(object sender, RoutedEventArgs e)
         {
             BO.Task? task = (sender as ListView)?.SelectedItem as BO.Task;

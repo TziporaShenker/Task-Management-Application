@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,10 +15,16 @@ namespace PL.Engineer
         public EngineerListWindow()
         {
             InitializeComponent();
-            EngineerList = s_bl?.Engineer.ReadAll()!;
-            
+            var temp = s_bl?.Engineer.ReadAll();
+            EngineerList = temp;
         }
 
+        // עדכון רשימת המשימות לאחר סגירת חלון משימה
+        private void UpdateListAfterEnginnerWindowClosed()
+        {
+            var temp = s_bl?.Engineer.ReadAll();
+            EngineerList = temp;
+        }
         public IEnumerable<BO.Engineer> EngineerList
         {
             get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
@@ -33,17 +40,29 @@ namespace PL.Engineer
                 s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == EngineerExperience)!;
         }
 
+        // פעולת התגובה ללחיצה על כפתור "הוספה"
         private void BtnAddEngineer_Click(object sender, RoutedEventArgs e)
         {
-            new EngineerWindow().ShowDialog();
-
+            //new EngineerWindow().ShowDialog();
+            try
+            {
+                var engineerWindow = new EngineerWindow();
+                engineerWindow.Closed += (sender, e) => UpdateListAfterEnginnerWindowClosed();
+                engineerWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex}", "Confirmation", MessageBoxButton.OK);
+            }
 
         }
+        // פעולת התגובה ללחיצה כפולה על אובייקט ברשימה לעדכון פרטיו
         private void UpdateEngineer_click(object sender, RoutedEventArgs e)
         {
             BO.Engineer? engineer = (sender as ListView)?.SelectedItem as BO.Engineer;
-            new EngineerWindow(engineer.Id).ShowDialog();
-
+            var engineerWindow = new EngineerWindow(engineer.Id);
+            engineerWindow.Closed += (s, args) => UpdateListAfterEnginnerWindowClosed();
+            engineerWindow.ShowDialog();
         }
     }
 }

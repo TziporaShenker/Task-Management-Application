@@ -41,6 +41,8 @@ internal class EngineerImplementation : IEngineer
     {
 
         DO.Engineer? doEngineer = _dal.Engineer.Read(id);
+        var task = _dal.Task.Read(task => task.EngineerId == id);
+
         return doEngineer == null
             ? throw new BO.BlDoesNotExistException($"Engineer with ID={id} does Not exist")
             : new BO.Engineer()
@@ -50,7 +52,7 @@ internal class EngineerImplementation : IEngineer
                 Email = doEngineer.Email,
                 Level = (BO.EngineerExperience)doEngineer.Level,
                 Cost = doEngineer.Cost,
-                Task = null,
+                Task = task!=null ? new Tuple<int, string>(task.Id, task.Alias) : null,
             };
     }
 

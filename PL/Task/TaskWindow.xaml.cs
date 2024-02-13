@@ -1,5 +1,7 @@
 ﻿using PL.Engineer;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,7 +15,6 @@ namespace PL.Task
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public BO.Status Status { get; set; } = BO.Status.Unscheduled;
 
-
         public BO.Task Task
         {
             get { return (BO.Task)GetValue(TaskProperty); }
@@ -22,6 +23,7 @@ namespace PL.Task
         public TaskWindow(int Id = 0)
         {
             InitializeComponent();
+            EngineerList = s_bl.Engineer.ReadAll()!.Select(engineer => engineer.Id).ToList();
             if (Id == 0)
             {
                 Task = new BO.Task();
@@ -30,9 +32,9 @@ namespace PL.Task
             else
             {
                 try
-                {
-                    Task = s_bl.Task.Read(Id)!;
+                {            
 
+                    Task = s_bl.Task.Read(Id)!;
                 }
                 catch (Exception)
                 {
@@ -61,7 +63,15 @@ namespace PL.Task
 
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        public List<int> EngineerList
+        {
+            get { return (List<int>)GetValue(EngineerListProperty); }
+            set { SetValue(EngineerListProperty, value); }
+        }
+        public static readonly DependencyProperty EngineerListProperty =
+          DependencyProperty.Register("EngineerList", typeof(List<int>), typeof(EngineerListWindow), new PropertyMetadata(null));
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

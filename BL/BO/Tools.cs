@@ -35,6 +35,11 @@ internal static class Tools
                     str = str.TrimEnd(',', ' ') + "]";
                 }
             }
+            else if (property.GetValue(p)!=null&& property.PropertyType == typeof(Tuple<int, string>))
+            {
+                var tupleValue = (Tuple<int, string>)property.GetValue(p);
+                str += $"{property.Name}: ({tupleValue.Item1}, {tupleValue.Item2}), ";
+            }
             else
             {
                 str += $" {property.Name}: {property.GetValue(p)},";
