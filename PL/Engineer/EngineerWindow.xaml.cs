@@ -8,7 +8,7 @@ namespace PL.Engineer
     /// <summary>
     /// Interaction logic for EngineerWindow.xaml
     /// </summary>
-  
+
     public partial class EngineerWindow : Window
     {
         static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
@@ -26,7 +26,7 @@ namespace PL.Engineer
             if (Id == 0)
             {
                 Engineer = new BO.Engineer();
-                 
+
             }
             else
             {
@@ -41,18 +41,34 @@ namespace PL.Engineer
                     throw;
                 }
             }
-          
+
         }
-       
+
 
         public static readonly DependencyProperty EngineerProperty =
             DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null));
 
         private void BtnSaveEngineer_Click(object sender, RoutedEventArgs e)
         {
+            if (Engineer.Id == 0 || string.IsNullOrWhiteSpace(Engineer.Name) || string.IsNullOrWhiteSpace(Engineer.Email))
+            {
+                MessageBox.Show("Please fill in all required fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (!IsValidEmail(Engineer.Email))
+            {
+                MessageBox.Show("Please enter a valid email address.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            //if (comboBox.SelectedIndex == 0)
+            //{
+            //    MessageBox.Show("Please select a task.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+            //}
             Button clickedButton = (Button)sender;
             object contentValue = clickedButton.Content;
-            if (contentValue == "Add") {
+            if (contentValue == "Add")
+            {
                 s_bl.Engineer.Create(Engineer);
             }
             else
@@ -62,6 +78,17 @@ namespace PL.Engineer
             this.Close();
 
         }
-
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
