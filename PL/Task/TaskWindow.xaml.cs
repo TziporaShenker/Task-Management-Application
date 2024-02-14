@@ -22,28 +22,40 @@ namespace PL.Task
         }
         public TaskWindow(int Id = 0)
         {
-            InitializeComponent();
-            if (Id == 0)
+            try
             {
-                Task = new BO.Task();
-                Task.Engineer = new BO.EngineerInTask();
-            }
-            else
-            {
-                try
-                {            
-
-                    Task = s_bl.Task.Read(Id)!;         
-                    if (Task.Engineer == null) { 
-                    Task.Engineer = new BO.EngineerInTask();}
-
-                }
-                catch (Exception)
+                InitializeComponent();
+                if (Id == 0)
                 {
+                    Task = new BO.Task();
+                    Task.Engineer = new BO.EngineerInTask();
+                }
+                else
+                {
+                    try
+                    {
 
-                    throw;
+                        Task = s_bl.Task.Read(Id)!;
+                        if (Task.Engineer == null)
+                        {
+                            Task.Engineer = new BO.EngineerInTask();
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
         }
 
         public static readonly DependencyProperty TaskProperty =
@@ -67,7 +79,15 @@ namespace PL.Task
             object contentValue = clickedButton.Content;
             if (contentValue == "Add")
             {
-                s_bl.Task.Create(Task);
+                try
+                {
+                    s_bl.Task.Create(Task);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
             else
             {
@@ -87,9 +107,16 @@ namespace PL.Task
                     }
 
                 }
+                try
+                {
+                    s_bl.Task.Update(Task);
+                }
+                catch (Exception ex)
+                {
 
-                //האיתחול נעשה רק פה במידה ויש מהדנס עם תז כזה
-                s_bl.Task.Update(Task);
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
             }
             this.Close();
         }
