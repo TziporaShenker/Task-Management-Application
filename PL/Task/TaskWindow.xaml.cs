@@ -51,7 +51,18 @@ namespace PL.Task
 
         private void BtnSaveTask_Click(object sender, RoutedEventArgs e)
         {
-            
+
+            if (string.IsNullOrWhiteSpace(Task.Alias) || string.IsNullOrWhiteSpace(Task.Description))
+            {
+                MessageBox.Show("Please fill in all required fields.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (Task.Copmlexity == 0)
+            {
+                MessageBox.Show("Please select a Copmlexity.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             Button clickedButton = (Button)sender;
             object contentValue = clickedButton.Content;
             if (contentValue == "Add")
@@ -61,12 +72,27 @@ namespace PL.Task
             else
             {
                 if (Task.Engineer.Id == 0)
-                { Task.Engineer= null; }
+                { Task.Engineer = null; }
+
+                if (((Task.Engineer) != null))
+                {
+                    try
+                    {
+                        s_bl.Engineer.Read(Task.Engineer.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                }
 
                 //האיתחול נעשה רק פה במידה ויש מהדנס עם תז כזה
                 s_bl.Task.Update(Task);
             }
             this.Close();
         }
+    }
     }
 }

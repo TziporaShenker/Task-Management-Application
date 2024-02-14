@@ -70,7 +70,9 @@ internal class TaskImplementation : ITask
 
     public IEnumerable<BO.Task?> ReadAll(Func<BO.Task, bool>? filter = null)
     {
-        return from DO.Task doTask in _dal.Task.ReadAll((Func<DO.Task, bool>?)filter)
+        Func<BO.Task, bool> filter1 = filter != null ? filter! : item => true;
+
+        return (from DO.Task doTask in _dal.Task.ReadAll()
                select new BO.Task()
                {
                    Id = doTask.Id,
@@ -90,15 +92,15 @@ internal class TaskImplementation : ITask
                    Remarks = doTask.Remarks,
                    Engineer = ReadEngineerInTask(doTask.EngineerId),
                    Copmlexity = (BO.EngineerExperience?)doTask.Copmlexity
-               };
+               }).Where(filter1);
     }
-
+   
     public void Update(BO.Task boTask)
     {
         if (Read(boTask.Id) is null)
             throw new BO.BlDoesNotExistException($"Task with ID={boTask.Id} does Not exist");
 
-        DO.Task doTask = new (boTask.Id, boTask.Alias, boTask.Description, boTask.CreatedAtDate, boTask.RequiredEffortTime, false, boTask.StartDate, boTask.ScheduledDate, boTask.DeadlineDate, boTask.CompleteDate, boTask.Deliverables, boTask.Remarks, boTask.Engineer.Id, (DO.EngineerExperience?)boTask.Copmlexity);
+        DO.Task doTask = new (boTask.Id, boTask.Alias, boTask.Description, boTask.CreatedAtDate, boTask.RequiredEffortTime, false, boTask.StartDate, boTask.ScheduledDate, boTask.DeadlineDate, boTask.CompleteDate, boTask.Deliverables, boTask.Remarks, boTask.Engineer?.Id, (DO.EngineerExperience?)boTask.Copmlexity);
         try
         {
             _dal.Task.Update(doTask);

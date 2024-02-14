@@ -64,5 +64,10 @@ namespace PL.Task
             taskWindow.Closed += (s, args) => UpdateListAfterTaskWindowClosed();
             taskWindow.ShowDialog();
         }
+        private void CBCopmlexity_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TaskList = (EngineerExperience == BO.EngineerExperience.None) ?
+                s_bl?.Task.ReadAll()! : s_bl?.Task.ReadAll(item => item.Copmlexity == EngineerExperience)!;
+        }
     }
 }

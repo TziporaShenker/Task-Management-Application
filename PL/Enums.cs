@@ -19,3 +19,4 @@ internal class StatusCollection : IEnumerable
     public IEnumerator GetEnumerator() => s_enums.GetEnumerator();
 }
 
+
