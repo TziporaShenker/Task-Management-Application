@@ -112,7 +112,7 @@ namespace PL.Task
             else
             {
                 // Update an existing task
-                if (Task.Engineer.Id == 0)
+                if (Task.Engineer?.Id == 0)
                 {
                     // If engineer ID is 0, set engineer to null
                     Task.Engineer = null;

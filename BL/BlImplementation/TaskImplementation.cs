@@ -163,7 +163,7 @@ internal class TaskImplementation : ITask
 
         return doTask.CompleteDate.HasValue && doTask.CompleteDate.Value <= today
             ? Status.Done
-            : doTask.DeadlineDate.HasValue && doTask.DeadlineDate.Value >= today.AddDays(-7)
+            : doTask.DeadlineDate.HasValue && doTask.DeadlineDate.Value.AddDays(-7) <= today
                 ? Status.InJeopardy
                 : doTask.StartDate.HasValue && doTask.StartDate.Value <= today
                     ? Status.OnTrack
