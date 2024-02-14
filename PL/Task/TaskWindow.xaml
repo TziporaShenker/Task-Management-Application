@@ -44,6 +44,7 @@
         <TextBox HorizontalAlignment="Left" Margin="484,217,0,0" TextWrapping="Wrap" Text="{Binding Deliverables, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="129" Height="34" RenderTransformOrigin="0.367,-0.12"/>
         <Label Content="Remarks" HorizontalAlignment="Left" Margin="371,260,0,0" VerticalAlignment="Top" Height="34" Width="98" RenderTransformOrigin="0.143,0.676"/>
         <TextBox HorizontalAlignment="Left" Margin="484,260,0,0" TextWrapping="Wrap" Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Top" Width="130" Height="34" RenderTransformOrigin="0.367,-0.12"/>
+        <Image HorizontalAlignment="Left" Height="158" Margin="10,446,0,0" VerticalAlignment="Top" Width="254" Source="/Task/צילום מסך 2024-02-13 220058.png" Stretch="UniformToFill"/>
 
     </Grid>
 </Window>

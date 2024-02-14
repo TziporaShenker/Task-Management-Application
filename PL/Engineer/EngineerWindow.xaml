@@ -21,6 +21,7 @@
         <Label Content="Task" HorizontalAlignment="Left" Margin="82,375,0,0" VerticalAlignment="Top" Height="34" Width="99" RenderTransformOrigin="0.143,0.676"/>
         <Label Content="{Binding Task, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="180,380,0,0" VerticalAlignment="Top" Width="130" Height="24"/>
         <Button Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" HorizontalAlignment="Left" Margin="303,485,0,0" VerticalAlignment="Top" Height="44" Width="108" Click="BtnSaveEngineer_Click"/>
+        <Image HorizontalAlignment="Left" Height="158" Margin="10,456,0,0" VerticalAlignment="Top" Width="254" Source="/Task/צילום מסך 2024-02-13 220058.png" Stretch="UniformToFill"/>
 
     </Grid>
 </Window>

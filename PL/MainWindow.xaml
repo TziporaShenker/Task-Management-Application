@@ -8,8 +8,9 @@
         Title="MainWindow" Height="640" Width="800">
     <Grid>
         <Button Content="Initialization" HorizontalAlignment="Left" Height="58" Margin="333,105,0,0" VerticalAlignment="Top" Width="124" Click="BtnInitialization_Click"/>
-        <Button Content="Handle Engineers" HorizontalAlignment="Left" Height="67" Margin="333,198,0,0" VerticalAlignment="Top" Width="124" Click="BtnEngineers_Click"/>
-        <Button Content="Handle Tasks" HorizontalAlignment="Left" Height="67" Margin="333,301,0,0" VerticalAlignment="Top" Width="124" Click="BtnTasks_Click"/>
+        <Button Content="Handle Engineers" HorizontalAlignment="Left" Height="67" Margin="441,208,0,0" VerticalAlignment="Top" Width="124" Click="BtnEngineers_Click"/>
+        <Button Content="Handle Tasks" HorizontalAlignment="Left" Height="67" Margin="221,208,0,0" VerticalAlignment="Top" Width="124" Click="BtnTasks_Click"/>
+        <Image HorizontalAlignment="Center" Height="309" Margin="0,291,0,0" VerticalAlignment="Top" Width="540" Source="/צילום מסך 2024-02-13 220058.png" Stretch="UniformToFill"/>
 
     </Grid>
 </Window>
