@@ -33,6 +33,18 @@ namespace BlImplementation
                 null,
                 (DO.EngineerExperience?)boTask.Copmlexity);
 
+            var dependenciesToCreate = boTask.Dependencies != null ? boTask.Dependencies
+               .Select(task => new DO.Dependency
+               {
+                   DependentTask = boTask.Id,
+                   DependsOnTask = task.Id
+               })
+               .ToList() : (List<DO.Dependency>?)null;
+            // יצירת כל תלות המשימה באמצעות ה-Dependency ב-DAL
+            if (dependenciesToCreate != null)
+            {
+                dependenciesToCreate.ForEach(dependency => _dal.Dependency.Create(dependency));
+            }
             try
             {
                 int idTask = _dal.Task.Create(doTask);
@@ -155,6 +167,20 @@ namespace BlImplementation
                 boTask.Engineer?.Id,
                 (DO.EngineerExperience?)boTask.Copmlexity);
 
+            foreach (var dependency in _dal.Dependency.ReadAll(d => d.DependentTask == boTask.Id))
+            {
+                _dal.Dependency.Delete(dependency.Id);
+            }
+
+            // יצירת תלות חדשות על פי התלות שהוגדרו ב-BO
+            if (boTask.Dependencies != null)
+            {
+                foreach (TaskInList doDependency in boTask.Dependencies)
+                {
+                    DO.Dependency doDepend = new DO.Dependency(0, boTask.Id, doDependency.Id);
+                    int idDependency = _dal.Dependency.Create(doDepend);
+                }
+            }
             try
             {
                 _dal.Task.Update(doTask);

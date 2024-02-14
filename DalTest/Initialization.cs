@@ -1,13 +1,6 @@
-﻿
-namespace DalTest;
+﻿namespace DalTest;
 using DalApi;
 using DO;
-using System.Diagnostics;
-using System.Net;
-using System.Numerics;
-using System.Security.Cryptography;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Security.Principal;
 
 /// <summary>
 /// A class responsible for initializing the data
@@ -88,35 +81,6 @@ public static class Initialization
             "Documenting and communicating engineering processes and outcomes effectively."
         };
 
-        //foreach (var _description in tasksDescription)
-        //{
-        //    string _alias="dd";
-        //    bool _milestone = false;
-        //    DateTime _createdAt = DateTime.Now.AddDays(-30);
-        //    DateTime? _start = null;
-        //    DateTime? _scheduledDate= null;
-        //    DateTime? _forecastDate = null;
-        //    DateTime? _deadLine= null;
-        //    DateTime? _complete= null;
-        //    string? _deriverables = null;
-        //    string? _remarks=null;
-        //    int? _engineerId;
-        //    EngineerExperience _copmlexityLevel;
-
-
-        //    IEnumerable<Engineer?> engineersList= s_dal.Engineer.ReadAll();
-        //    int x = s_rand.Next(0, engineersList.Count());
-        //    _engineerId= engineersList.ElementAt(x).Id;
-
-        //    _engineerId = null;
-
-        //    x = s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
-        //    _copmlexityLevel = (EngineerExperience)x;
-
-        //    Task newTsk = new (0,_description, _alias, _milestone, _createdAt, _start, _scheduledDate, _forecastDate ,_deadLine, _complete, _deriverables, _remarks, _engineerId, _copmlexityLevel);
-
-        //    s_dal.Task.Create(newTsk);
-        //}
         var tasks =
            tasksDescription.Select(_description =>
            {
@@ -167,26 +131,13 @@ public static class Initialization
             {
                 do
                     x = s_rand.Next(1, tasksList.Count());
-                while (tasksList.ElementAt(_dependentTask).Id == x);
-                _dependsOnTask = tasksList.ElementAt(x).Id;
+                while (_dependentTask == x);
+                _dependsOnTask = x;
                 return new Dependency(0, _dependentTask, _dependsOnTask);
 
             });
         dependecies.ToList().ForEach(dependency => s_dal.Dependency!.Create(dependency));
 
-
-        //for (int i = 0; i < 40; i++)
-        //{
-        //    int a = s_rand.Next(0, tasksList.Count());
-        //    _dependentTask = tasksList.ElementAt(a).Id;
-        //    do
-        //        x = s_rand.Next(0, tasksList.Count());
-        //    while (tasksList.ElementAt(a).Id == x);
-
-        //    _dependsOnTask = tasksList.ElementAt(x).Id;
-        //    Dependency newDep = new(0, _dependentTask, _dependsOnTask);
-        //    s_dal.Dependency!.Create(newDep);
-        //}
     }
 
     /// <summary>

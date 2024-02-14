@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -147,6 +148,43 @@ namespace PL.Task
             }
             // Close the window after the operation is completed
             this.Close();
+        }
+
+        private void BtnAddDependency_Click(object sender, RoutedEventArgs e)
+        {
+            if (addDependency.Text == Task.Id.ToString())
+            {
+                MessageBox.Show("can not create a task dependency for itself", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            foreach (var dependency in Task.Dependencies)
+            {
+                if (dependency.Id.ToString() == addDependency.Text)
+                {
+                    MessageBox.Show("A task dependency with the same ID already exists", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
+            try
+            {
+                s_bl.Task.Read(Convert.ToInt32(addDependency.Text));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            var task = s_bl.Task.Read(Convert.ToInt32(addDependency.Text));
+            var taskInList = new BO.TaskInList
+            {
+                Id = task.Id,
+                Description = task.Description,
+                Alias = task.Alias,
+                Status = task.Status,
+            };
+            
+            Task.Dependencies.Add(taskInList);
+            
+
         }
     }
 }
