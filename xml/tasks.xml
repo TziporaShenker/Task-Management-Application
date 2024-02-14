@@ -314,8 +314,10 @@
     <StartDate xsi:nil="true" />
     <ScheduledDate xsi:nil="true" />
     <DeadlineDate xsi:nil="true" />
-    <CompleteDate xsi:nil="true" />
-    <EngineerId xsi:nil="true" />
+    <CompleteDate>2024-02-13T00:00:00</CompleteDate>
+    <Deliverables />
+    <Remarks />
+    <EngineerId>255325327</EngineerId>
     <Copmlexity>Proficient</Copmlexity>
   </Task>
 </ArrayOfTask>

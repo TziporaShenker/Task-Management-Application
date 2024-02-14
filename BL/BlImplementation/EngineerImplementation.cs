@@ -91,14 +91,21 @@ internal class EngineerImplementation : IEngineer
             throw new BO.BlDoesNotExistException(ex.Message, ex);
         }
     }
-    public Tuple<int, string>? ReadTaskInEngineer(int id)
+    public TaskInEngineer? ReadTaskInEngineer(int id)
     {
-       var task = _dal.Task.ReadAll()
-       .Where(doTask => (doTask.Id == id && doTask.StartDate != null && doTask.CompleteDate != null && doTask.StartDate <= DateTime.Today && doTask.CompleteDate >= DateTime.Today))
-       .Select(doTask => Tuple.Create(doTask!.Id, doTask!.Alias))
-       .FirstOrDefault();
+        if (id == null)
+            return null;
 
-        return task;
+        var doTask = _dal.Task.ReadAll()
+            .FirstOrDefault(doTask => doTask.EngineerId == id);
+
+        if (doTask == null)
+            return null;
+
+        return new TaskInEngineer
+        {
+            Id = doTask.Id,
+            Alias = doTask.Alias
+        };
     }
-   
 }
