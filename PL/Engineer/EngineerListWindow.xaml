@@ -24,8 +24,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- Label נוסף לתוך העמודה הראשונה של הגריד הפנימי העליון -->
-            <Label Content="Label" HorizontalAlignment="Left" Margin="40,-3,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.658,0.592" Grid.Column="0"/>
-
+            <Label Content="filter by level" HorizontalAlignment="Center" Margin="40,-3,0,0" VerticalAlignment="Center" RenderTransformOrigin="1.658,0.592" Grid.Column="0" FontSize="16" FontFamily="Cascadia Code SemiBold" FontWeight="Bold" FontStyle="Italic"/>
             <!-- ComboBox נוסף לתוך העמודה השנייה של הגריד הפנימי העליון -->
             <ComboBox ItemsSource="{Binding Source={StaticResource EngineerExperienceCollectionKey}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"  SelectedValue="{Binding Path=EngineerExperience, Mode=TwoWay}" SelectionChanged="CBEngineerExperience_SelectionChanged"/>
         </Grid>

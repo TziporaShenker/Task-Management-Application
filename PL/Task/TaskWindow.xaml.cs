@@ -26,7 +26,7 @@ namespace PL.Task
             if (Id == 0)
             {
                 Task = new BO.Task();
-
+                Task.Engineer = new BO.EngineerInTask();
             }
             else
             {
@@ -34,6 +34,9 @@ namespace PL.Task
                 {            
 
                     Task = s_bl.Task.Read(Id)!;
+                    if (Task.Engineer == null) { 
+                    Task.Engineer = new BO.EngineerInTask();}
+
                 }
                 catch (Exception)
                 {
@@ -56,15 +59,11 @@ namespace PL.Task
             }
             else
             {
-                s_bl.Task.Update(Task);
+                //if (Task.Engineer.Id==0)
+                //{ Task.Engineer== null; }
+                    s_bl.Task.Update(Task);
             }
             this.Close();
-
-        }
-
-        
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
         }
     }

@@ -1,5 +1,4 @@
-﻿
-using BlApi;
+﻿using BlApi;
 using BO;
 using DO;
 
@@ -99,7 +98,7 @@ internal class TaskImplementation : ITask
         if (Read(boTask.Id) is null)
             throw new BO.BlDoesNotExistException($"Task with ID={boTask.Id} does Not exist");
 
-        DO.Task doTask = new (boTask.Id, boTask.Alias, boTask.Description, boTask.CreatedAtDate, boTask.RequiredEffortTime, false, boTask.StartDate, boTask.ScheduledDate, boTask.DeadlineDate, boTask.CompleteDate, boTask.Deliverables, boTask.Remarks, null, (DO.EngineerExperience?)boTask.Copmlexity);
+        DO.Task doTask = new (boTask.Id, boTask.Alias, boTask.Description, boTask.CreatedAtDate, boTask.RequiredEffortTime, false, boTask.StartDate, boTask.ScheduledDate, boTask.DeadlineDate, boTask.CompleteDate, boTask.Deliverables, boTask.Remarks, boTask.Engineer.Id, (DO.EngineerExperience?)boTask.Copmlexity);
         try
         {
             _dal.Task.Update(doTask);
@@ -112,15 +111,33 @@ internal class TaskImplementation : ITask
 
     }
 
-    public Tuple<int, string>? ReadEngineerInTask(int? engineerId)
-    {
-        var engineer = _dal.Engineer.ReadAll()
-            .Where(doEngineer => doEngineer!.Id == engineerId)
-            .Select(doEngineer => Tuple.Create(doEngineer!.Id, doEngineer!.Name))
-            .FirstOrDefault();
+    //public EngineerInTask? ReadEngineerInTask(int? engineerId)
+    //{
+    //    var engineer = _dal.Engineer.ReadAll()
+    //        .Where(doEngineer => doEngineer!.Id == engineerId)
+    //        .Select(doEngineer => Tuple.Create(doEngineer!.Id, doEngineer!.Name))
+    //        .FirstOrDefault();
 
-        return engineer;
+    //    return engineer;
+    //}
+    public EngineerInTask? ReadEngineerInTask(int? engineerId)
+    {
+        if (engineerId == null)
+            return null;
+
+        var doEngineer = _dal.Engineer.ReadAll()
+            .FirstOrDefault(doEngineer => doEngineer.Id == engineerId);
+
+        if (doEngineer == null)
+            return null;
+
+        return new EngineerInTask
+        {
+            Id = doEngineer.Id,
+            Name = doEngineer.Name
+        };
     }
+
     public List<TaskInList>? ReadDependencies(int taskId)
     {
         
