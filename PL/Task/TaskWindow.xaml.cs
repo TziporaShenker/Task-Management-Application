@@ -94,5 +94,4 @@ namespace PL.Task
             this.Close();
         }
     }
-    }
 }
