@@ -35,4 +35,11 @@
     <Level>Proficient</Level>
     <Cost>412</Cost>
   </Engineer>
+  <Engineer>
+    <Id>1234</Id>
+    <Name>קקק</Name>
+    <Email>aa@aa</Email>
+    <Level>Competent</Level>
+    <Cost>123</Cost>
+  </Engineer>
 </ArrayOfEngineer>

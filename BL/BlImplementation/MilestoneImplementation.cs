@@ -205,7 +205,7 @@ namespace BlImplementation
         /// <param name="milestone">The milestone to update.</param>
         public void Update(Milestone milestone)
         {
-            if (GetMilestone(milestone.Id) is null)
+            if (Read(milestone.Id) is null)
                 throw new BO.BlDoesNotExistException($"Milestone with ID={milestone.Id} does not exist");
 
             DO.Task doMilestone = new DO.Task
