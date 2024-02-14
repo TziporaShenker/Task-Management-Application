@@ -1,4 +1,8 @@
 ﻿namespace BO;
+
+/// <summary>
+/// Enumerates the possible experience levels of an engineer.
+/// </summary>
 public enum EngineerExperience
 {
     None,
@@ -8,6 +12,10 @@ public enum EngineerExperience
     Proficient,
     Expert
 }
+
+/// <summary>
+/// Enumerates the possible statuses of a task.
+/// </summary>
 public enum Status
 {
     Unscheduled,//לא משובץ

@@ -1,11 +1,11 @@
 ﻿
-
-using System;
-
 namespace BO;
 
 public class Task
 {
+    /// <summary>
+    /// Represents a task entity.
+    /// </summary>
     public int Id { get; init; }
     public string Alias { get; set; }
     public string Description { get; set; }
@@ -24,6 +24,10 @@ public class Task
     public EngineerInTask? Engineer { get; set; }
     public EngineerExperience? Copmlexity { get; set; }
 
+    /// <summary>
+    /// Returns a string that represents the current engineer.
+    /// </summary>
+    /// <returns>A string representation of the engineer.</returns>
     public override string ToString()
     {
         return Tools.GenericToString(this);

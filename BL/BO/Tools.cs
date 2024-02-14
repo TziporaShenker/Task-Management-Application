@@ -4,7 +4,12 @@ using System.Reflection;
 namespace BO;
 
 internal static class Tools
-{
+
+{ /// <summary>
+  /// Generates a string representation of an object.
+  /// </summary>
+  /// <param name="p">The object to generate the string representation for.</param>
+  /// <returns>A string representation of the object.</returns>
     public static string GenericToString(this object p)
     {
         var prop = p.GetType().GetProperties();
@@ -35,10 +40,6 @@ internal static class Tools
                     str = str.TrimEnd(',', ' ') + "]";
                 }
             }
-            //else if (property.Name == "Task")
-            //{
-
-            //}
             else
                     {
                 str += $" {property.Name}: {property.GetValue(p)},";
@@ -47,38 +48,6 @@ internal static class Tools
 
         return str.TrimEnd(',', ' ');
     }
-    //public static string GenericToString(this object p)
-    //{
-    //    var props = p.GetType().GetProperties();
-    //    string str = "";
-
-    //    foreach (var prop in props)
-    //    {
-    //        if (prop.Name == "Dependencies")
-    //        {
-    //            str += $"{prop.Name}: [";
-    //            var dependencies = (IEnumerable<TaskInList>?)prop.GetValue(p);
-
-    //            if (dependencies != null)
-    //            {
-    //                foreach (var dependency in dependencies)
-    //                {
-    //                    str += dependency.ToString() + ", ";
-    //                }
-    //            }
-    //            str = str.TrimEnd(',', ' ') + "]";
-    //        }
-    //        else
-    //        {
-    //            str += $" {prop.Name}: {prop.GetValue(p)},";
-    //        }
-    //    }
-
-    //    return str.TrimEnd(',', ' ');
-    //}
-
-
-
 }
 
 

@@ -1,8 +1,9 @@
 ﻿
-using System;
-
 namespace BO;
 
+/// <summary>
+/// Represents a milestone entity with its properties.
+/// </summary>
 public class Milestone
 {
     public int Id { get; init; }
