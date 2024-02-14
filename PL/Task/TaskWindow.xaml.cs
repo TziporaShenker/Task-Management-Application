@@ -33,7 +33,7 @@ namespace PL.Task
                 try
                 {            
 
-                    Task = s_bl.Task.Read(Id)!;
+                    Task = s_bl.Task.Read(Id)!;         
                     if (Task.Engineer == null) { 
                     Task.Engineer = new BO.EngineerInTask();}
 
@@ -51,6 +51,7 @@ namespace PL.Task
 
         private void BtnSaveTask_Click(object sender, RoutedEventArgs e)
         {
+            
             Button clickedButton = (Button)sender;
             object contentValue = clickedButton.Content;
             if (contentValue == "Add")
@@ -59,12 +60,13 @@ namespace PL.Task
             }
             else
             {
-                //if (Task.Engineer.Id==0)
-                //{ Task.Engineer== null; }
-                    s_bl.Task.Update(Task);
+                if (Task.Engineer.Id == 0)
+                { Task.Engineer= null; }
+
+                //האיתחול נעשה רק פה במידה ויש מהדנס עם תז כזה
+                s_bl.Task.Update(Task);
             }
             this.Close();
-
         }
     }
 }
