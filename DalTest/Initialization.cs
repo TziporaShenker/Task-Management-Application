@@ -102,7 +102,6 @@ public static class Initialization
                int x = s_rand.Next(0, engineersList.Count());
                _engineerId = engineersList.ElementAt(x).Id;
 
-               _engineerId = null;
 
                x = s_rand.Next(0, Enum.GetNames<EngineerExperience>().Count());
                _copmlexityLevel = (EngineerExperience)x;
