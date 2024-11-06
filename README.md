@@ -1,7 +1,3 @@
-# dotNet5784_9645_8589
-שלום וברכה!
-נתבקשנו לציין את הבונוס עבודה שעשינו מעבר למה שחובה:
-1.יצרנו פעולת ToString גנרית המטפלת בכל פעולות ההדפסה בפרויקט.
-2.יצרנו את כל דרישות הפרויקט המלאות מלבד יצירת לוח זמנים, כלומר עשינו מחלקת Milestone במלואה וממישנו בעבורה פעולות ICRUD,ההתעסקות עם מחלקה זו הייתה קשה ומורכבת ביותר ,נשמח לקבל את התגמול הראוי.
-3.מכיוון שלא עשינו לוח זמנים יש אפשרויות שניתן לראות רק ע"י הכנסה ידנית של תאריכים בעדכון משימה,כגון עדכון הסטטוס בהתאם לתאריכים המתעדכנים.
-תודה רבה!
+Project Overview
+
+The project focuses on developing a task management system for a single project. It includes a user interface for project managers to manage tasks and a separate interface for engineers to update their details and report task progress. The system is developed in stages, each building on the previous one, following a layered architecture. System Functionality Project Manager Manage Tasks: View the list of tasks. Add, update, and assign tasks. Define project schedules and milestones. Manage Milestones: View the list of milestones. Set task dependencies for milestones. Update milestone details. Manage Engineers: Add and remove engineers. View lists of engineers, tasks, and milestones associated with an engineer.
